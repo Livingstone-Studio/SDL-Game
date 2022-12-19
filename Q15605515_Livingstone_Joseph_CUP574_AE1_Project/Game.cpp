@@ -43,10 +43,14 @@ void Game::Setup()
 
     AssetLoader::Initialize(m_renderer);
 
+
     m_gameobjects.push_back(new Player({ 0, 0, 5, 5 }));
     
     m_player_cast = static_cast<Player*>(m_gameobjects[0]);
 
+    vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/TestLevel.txt");
+
+    m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
 }
 
 void Game::FrameInit()

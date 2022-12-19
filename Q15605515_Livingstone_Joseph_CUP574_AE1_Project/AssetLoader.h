@@ -23,4 +23,7 @@ private:
 	
 	static SDL_Texture* m_gobbie_spritesheet;
 	static SDL_Texture* m_orc_spritesheet;
+
+	static SDL_Texture* m_forgotten_plains_tileset;
+	static SDL_Texture* m_forgotten_plains_tileset_props;
 };

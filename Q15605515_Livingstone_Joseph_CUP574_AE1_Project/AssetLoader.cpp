@@ -1,14 +1,21 @@
 #include "AssetLoader.h"
 
 SDL_Renderer* AssetLoader::m_renderer = nullptr;
+
 SDL_Texture* AssetLoader::m_gobbie_spritesheet = nullptr;
 SDL_Texture* AssetLoader::m_orc_spritesheet = nullptr;
+
+SDL_Texture* AssetLoader::m_forgotten_plains_tileset = nullptr;
+SDL_Texture* AssetLoader::m_forgotten_plains_tileset_props = nullptr;
 
 void AssetLoader::Initialize(SDL_Renderer* renderer)
 {
     m_renderer = renderer;
     m_gobbie_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_CreaturesGoblinAnimations+Shadows.png");
     m_orc_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_CreaturesWildOrcAnimations+Shadows.png");
+
+    m_forgotten_plains_tileset = LoadImage(renderer, "Assets/Tilesets/Minifantasy_ForgottenPlainsTiles.png");
+    m_forgotten_plains_tileset_props = LoadImage(renderer, "Assets/Tilesets/Minifantasy_ForgottenPlainsProps.png");
 }
 
 void AssetLoader::Cleanup()
@@ -21,6 +28,8 @@ SDL_Texture* AssetLoader::GetCharacterSheet(string name)
 {
     if (name == "Gobbie") return m_gobbie_spritesheet;
     else if (name == "Orc") return m_orc_spritesheet;
+    else if (name == "grass") return m_forgotten_plains_tileset;
+    else if (name == "tree") return m_forgotten_plains_tileset_props;
 
     return nullptr;
 }

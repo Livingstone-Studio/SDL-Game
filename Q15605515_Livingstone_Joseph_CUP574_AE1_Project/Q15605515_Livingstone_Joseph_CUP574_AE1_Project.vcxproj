@@ -154,9 +154,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LevelCreator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maths.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Prop.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
@@ -170,8 +172,10 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LevelCreator.h" />
     <ClInclude Include="Maths.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Prop.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="Time.h" />

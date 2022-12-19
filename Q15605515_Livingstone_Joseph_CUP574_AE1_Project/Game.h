@@ -10,6 +10,7 @@
 #include "Time.h"
 #include "Maths.h"
 #include "AssetLoader.h"
+#include "LevelCreator.h"
 
 #include "Camera.h"
 
