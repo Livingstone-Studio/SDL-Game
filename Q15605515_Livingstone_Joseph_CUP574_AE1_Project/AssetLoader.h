@@ -1,0 +1,26 @@
+#pragma once
+
+#include <SDL_image.h>
+#include <string>
+#include <iostream>
+
+using namespace std;
+static class AssetLoader
+{
+public:
+
+	static void Initialize(SDL_Renderer* renderer);
+
+	static void Cleanup();
+
+	static SDL_Texture* GetCharacterSheet(string name);
+
+private:
+
+	static SDL_Renderer* m_renderer;
+
+	static SDL_Texture* LoadImage(SDL_Renderer* renderer, string filePath);
+	
+	static SDL_Texture* m_gobbie_spritesheet;
+	static SDL_Texture* m_orc_spritesheet;
+};

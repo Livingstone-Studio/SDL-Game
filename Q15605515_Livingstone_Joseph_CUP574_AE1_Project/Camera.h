@@ -1,0 +1,56 @@
+#pragma once
+
+#include "GameObject.h"
+#include "Input.h"
+
+#include <vector>
+#include <algorithm>
+
+class GameObject;
+
+class Camera
+{
+public:
+
+	Camera();
+
+	~Camera();
+
+	Vector2 SetCameraSize(Vector2 size) { m_transform.scale = size; }
+
+	Transform ConvertedToScreenSpace(Transform t);
+
+	void Follow(GameObject* target, float deltaTime);
+
+	void Update(Vector2 size);
+
+	void RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
+	void RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
+
+
+private:
+
+	vector<GameObject*> SortRenderOrder(vector<GameObject*> gameObjects);
+
+	void SetScale(float s) { m_scale = s; }
+	
+	void SetClampedSpeed(float s);
+
+	// Rendering
+
+	Transform m_transform{ 0, 0, 5, 5 };
+
+	Vector2 m_units_on_screen{ 10, 5 };
+	float m_scale{ 1.0f };
+	
+	Vector2 m_window_size{ 0, 0 };
+
+	// Follow
+
+	float m_follow_speed{ 0.0f };
+	float m_min_clamped_speed{ 1.0f };
+	float m_max_clamped_speed{ 5.0f };
+	float m_distance_before_follow{ 0.1f };
+
+};
+
