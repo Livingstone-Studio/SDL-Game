@@ -11,12 +11,6 @@ Sprite::Sprite(SDL_Renderer* renderer, string imgFile)
 	SetSprite(renderer, imgFile);
 }
 
-Sprite::Sprite(SDL_Renderer* renderer, string imgFile, Vector2 srcPos)
-	: m_srcRect{ (int)srcPos.x, (int)srcPos.y, BASE_SPRITE_WIDTH, BASE_SPRITE_HEIGHT }
-{
-	SetSprite(renderer, imgFile);
-}
-
 Sprite::~Sprite()
 {
 	if (m_sprite != nullptr) 
@@ -55,24 +49,6 @@ void Sprite::SetSprite(SDL_Renderer* renderer, string name)
 		SDL_QueryTexture(m_sprite, NULL, NULL, &imageWidth, &imageHeight);
 	}
 	else 
-	{
-		cout << "Image not set for texture query." << endl;
-	}
-}
-
-void Sprite::SetSprite(SDL_Renderer* renderer, string name, Vector2 srcPos)
-{
-	m_name = name;
-	m_sprite = AssetLoader::GetCharacterSheet(m_name);
-
-	m_srcRect.w = BASE_SPRITE_WIDTH;
-	m_srcRect.h = BASE_SPRITE_HEIGHT;
-
-	if (m_sprite)
-	{
-		SDL_QueryTexture(m_sprite, NULL, NULL, &imageWidth, &imageHeight);
-	}
-	else
 	{
 		cout << "Image not set for texture query." << endl;
 	}

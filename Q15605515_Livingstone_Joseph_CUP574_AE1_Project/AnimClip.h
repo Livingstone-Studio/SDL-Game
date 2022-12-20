@@ -45,5 +45,4 @@ private:
 	int m_startSpriteIndex{ 0 };
 	int m_currentSpriteIndex{ 0 };
 	bool m_looping{ true };
-
 };

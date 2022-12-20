@@ -8,6 +8,7 @@ public:
 
 	Prop();
 	Prop(Transform transform, string name, float sortOrder, AnimationInfo s, bool dynamicSort = false);
+	Prop(Transform transform, TileInfo tileInfo);
 
 	~Prop();
 
@@ -17,7 +18,7 @@ protected:
 
 	string m_sprite_name{ "grass" };
 
-	AnimationInfo m_sprite_info{ "grass", {0, 0, 0.0f, 0, false}, {0, 0, 0.0f, 0, false} };
+	AnimationInfo m_sprite_info{ "grass", {0, 0, 0.0f, 0, false}, {0, 0, 0.0f, 0, false}, { 0, 0 } };
 
 };
 

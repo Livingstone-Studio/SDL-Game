@@ -7,8 +7,6 @@ AnimClip::AnimClip()
 
 void AnimClip::Initialize(SDL_Renderer* renderer, string imgFile, AnimClipInfo anim)
 {
-	cout << imgFile << endl;
-
 	m_spritesheet.SetSprite(renderer, imgFile);
 	m_row = anim.row;
 	m_spriteCount = anim.spriteCount;

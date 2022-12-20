@@ -32,7 +32,7 @@ protected:
 
 	bool m_dynamic_sort_order{ true };
 
-	float m_default_sort{ 10 };
+	//float m_default_sort{ 10 };
 
 	CharacterAnimInfo m_charAnimInfo{ m_sprite_name,
 		//Idle

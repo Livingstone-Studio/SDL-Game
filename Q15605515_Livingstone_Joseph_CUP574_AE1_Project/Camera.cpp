@@ -20,13 +20,20 @@ Transform Camera::ConvertedToScreenSpace(Transform t)
 	// Camera Range (r-l, top-bottom)
 	Vector2 range = { m_transform.scale.x - (-m_transform.scale.x), m_transform.scale.y - (-m_transform.scale.y) };
 
+	// Get The Normalized Value To Scale To Fit Current Resolution.
+
+	Vector2 resolutionScale = m_window_size / m_default_window_size;
+
 	// Shift so object position min = 0;
-	offset.x = offset.x - (-m_transform.scale.x);
-	offset.y = offset.y - (-m_transform.scale.y);
+	offset.x = offset.x - (-m_transform.scale.x * resolutionScale.x);
+	offset.y = offset.y - (-m_transform.scale.y * resolutionScale.y);
 
 	// Normalise the offset.
-	offset.x = offset.x / range.x;
-	offset.y = offset.y / range.y;
+	offset.x = offset.x / (range.x);
+	offset.y = offset.y / (range.y);
+
+	offset.x = offset.x / (resolutionScale.x);
+	offset.y = offset.y / (resolutionScale.y);
 
 	// Apply Normalised To Screen.
 
@@ -47,9 +54,10 @@ void Camera::Follow(GameObject* target, float deltaTime)
 	}
 }
 
-void Camera::Update(Vector2 size)
+void Camera::Update( Vector2 defaultCamSize, Vector2 currentCamSize)
 {
-	m_window_size = size;
+	m_default_window_size = defaultCamSize;
+	m_window_size = currentCamSize;
 
 	if (Input::GetKeyDown(SDL_SCANCODE_1))
 	{
@@ -96,7 +104,7 @@ void Camera::RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObject
 
 vector<GameObject*> Camera::SortRenderOrder(vector<GameObject*> gameObjects)
 {
-	sort(gameObjects.begin(), gameObjects.end(),
+	stable_sort(gameObjects.begin(), gameObjects.end(),
 		[](GameObject* g1, GameObject* g2) {
 			return g1->m_sort_order < g2->m_sort_order; });
 

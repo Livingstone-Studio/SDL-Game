@@ -8,6 +8,7 @@
 
 class Sprite;
 class AnimClip;
+class Animation;
 class Camera;
 
 class GameObject
@@ -50,6 +51,8 @@ public:
 	float m_sort_order{ 0 };
 
 protected:
+
+	Transform AnimOffsetPosition();
 
 	bool m_dynamic_sort_order{ true };
 

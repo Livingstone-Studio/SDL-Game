@@ -40,5 +40,18 @@ void GameObject::RenderStart(SDL_Renderer* renderer, Camera camera)
 
 void GameObject::RenderUpdate(SDL_Renderer* renderer, Camera camera)
 {
-	if (m_render_initialized && !m_deletion) m_gfx.RenderUpdate(renderer, camera.ConvertedToScreenSpace(m_transform));
+	if (m_render_initialized && !m_deletion)
+	{
+		m_gfx.RenderUpdate(renderer, camera.ConvertedToScreenSpace(AnimOffsetPosition()));
+	}
+}
+
+Transform GameObject::AnimOffsetPosition()
+{
+	Transform t = m_transform;
+	Vector2 o = m_gfx.GetOffset();
+
+	t.position += o;
+
+	return t;
 }

@@ -22,7 +22,7 @@ public:
 
 	void Follow(GameObject* target, float deltaTime);
 
-	void Update(Vector2 size);
+	void Update( Vector2 defaultCamSize, Vector2 currentCamSize);
 
 	void RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
 	void RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
@@ -43,6 +43,7 @@ private:
 	Vector2 m_units_on_screen{ 10, 5 };
 	float m_scale{ 1.0f };
 	
+	Vector2 m_default_window_size{ 0, 0 };
 	Vector2 m_window_size{ 0, 0 };
 
 	// Follow

@@ -21,13 +21,12 @@ public:
 
 	Sprite();
 	Sprite(SDL_Renderer* renderer, string imgFile);
-	Sprite(SDL_Renderer* renderer, string imgFile, Vector2 srcPos);
+	Sprite(SDL_Renderer* renderer, string imgFile, Vector2 offset);
 
 	~Sprite();
 
 	void SetSprite();
 	void SetSprite(SDL_Renderer* renderer, string name);
-	void SetSprite(SDL_Renderer* renderer, string name, Vector2 srcPos);
 
 	SDL_Texture* GetSpriteTexture();
 
@@ -42,6 +41,8 @@ public:
 	void SetDesRect(Vector2 position, Vector2 scale);
 
 	void SetSrcRect(Vector2 position);
+	
+	void SetOffset(Vector2 offset) { m_offset = offset;  }
 
 	void Update();
 
@@ -56,6 +57,8 @@ private:
 
 	SDL_Rect m_srcRect;
 	SDL_Rect m_desRect;
+
+	Vector2 m_offset{ 0, 0 };
 
 	const int BASE_SPRITE_WIDTH{ 32 };
 	const int BASE_SPRITE_HEIGHT{ 32 };

@@ -4,15 +4,16 @@
 
 #include <vector>
 
+class Camera;
+
 class Animation
 {
 public:
 
 	Animation();
+	~Animation();
 
 	void InitAnim(SDL_Renderer* renderer, string imgFile, AnimationInfo anim);
-
-	~Animation();
 
 	void ChangeAnimation(SDL_Renderer* renderer, AnimationInfo animInfo);
 
@@ -24,11 +25,15 @@ public:
 
 	bool IsCompleted() { return completed; }
 
+	Vector2 GetOffset();
+
 private:
 
 	string m_sprite_name{ "" };
 
 	string m_anim_name{ "" };
+
+	Vector2 m_offset{ 0,0 };
 
 	AnimClip animClips[2];
 

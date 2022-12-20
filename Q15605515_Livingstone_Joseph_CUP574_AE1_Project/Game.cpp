@@ -46,7 +46,7 @@ void Game::Setup()
 
     m_gameobjects.push_back(new Player({ 0, 0, 5, 5 }));
     
-    m_player_cast = static_cast<Player*>(m_gameobjects[0]);
+    m_player_cast = dynamic_cast<Player*>(m_gameobjects[0]);
 
     vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/TestLevel.txt");
 
@@ -142,9 +142,9 @@ void Game::EventHandler()
 {
     int w, h;
     SDL_GetWindowSize(m_window, &w, &h);
-    m_camera.Update({ (float)w, (float)h });
+    m_camera.Update( { (float)DEFAULT_WINDOW_WIDTH, (float)DEFAULT_WINDOW_HEIGHT }, { (float)w, (float)h });
 
-    m_camera.Follow(m_gameobjects[0], Time::GetDeltaTime());
+    if (m_player_cast != nullptr) m_camera.Follow(m_player_cast, Time::GetDeltaTime());
 
     for (int i = 0; i < m_gameobjects.size(); i++)
     {
@@ -161,7 +161,7 @@ void Game::RendererHandler()
 
     m_camera.RenderUpdate(m_renderer, m_gameobjects);
 
-    SDL_SetRenderDrawColor(m_renderer, 113, 232, 2, 155);
+    SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
 
     SDL_RenderPresent(m_renderer);
 }
@@ -198,14 +198,14 @@ void Game::Close()
 void Game::SpawnEnemy()
 {
     m_gameobjects.push_back(new Enemy({ 20, -10, 5, 5 }));
-    Enemy* cast = static_cast<Enemy*>(m_gameobjects[m_gameobjects.size()-1]);
+    Enemy* cast = dynamic_cast<Enemy*>(m_gameobjects[m_gameobjects.size()-1]);
 
     if (cast != nullptr) cast->SetTarget(m_gameobjects[0]);
 }
 
 void Game::KillEnemy()
 {
-    Enemy* cast = static_cast<Enemy*>(m_gameobjects[m_gameobjects.size()-1]);
+    Enemy* cast = dynamic_cast<Enemy*>(m_gameobjects[m_gameobjects.size()-1]);
 
     if (cast != nullptr && m_gameobjects.size() - 1 != 0) cast->Delete();
 }

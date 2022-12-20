@@ -12,6 +12,7 @@ Animation::~Animation()
 void Animation::InitAnim(SDL_Renderer* renderer, string imgFile, AnimationInfo anim)
 {
 	m_sprite_name = imgFile;
+	m_offset = anim.offset;
 	animClips[0].Initialize(renderer, imgFile, anim.actionAnimClip);
 	animClips[1].Initialize(renderer, imgFile, anim.actionAnimShadow);
 }
@@ -23,6 +24,7 @@ void Animation::ChangeAnimation(SDL_Renderer* renderer, AnimationInfo animInfo)
 		if (animClips[0].IsInitialized() && animClips[1].IsInitialized())
 		{
 			m_anim_name = animInfo.name;
+			m_offset = animInfo.offset;
 			animClips[0].SetAnimation(animInfo.actionAnimClip);
 			animClips[1].SetAnimation(animInfo.actionAnimShadow);
 		}
@@ -54,3 +56,9 @@ void Animation::RenderUpdate(SDL_Renderer* renderer, Transform transform)
 		animClips[1 - i].RenderUpdate(renderer, transform);
 	}
 }
+
+Vector2 Animation::GetOffset()
+{
+	return m_offset;
+}
+

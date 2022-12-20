@@ -208,11 +208,11 @@ public:
 	bool looping{ true };
 
 	AnimClipInfo()
-		: AnimClipInfo(0, 0, 1.0f, 0, true)
+		: AnimClipInfo(0, 0, 1.0f, 0, true, { 0, 0 })
 	{
 	}
 
-	AnimClipInfo(int r, int sC, float t, int s, bool l)
+	AnimClipInfo(int r, int sC, float t, int s, bool l, Vector2 o = { 0, 0 })
 		: row{ r }, spriteCount{ sC }, animTimeBetween{ t }, start{ s }, looping{ l }
 	{
 	}
@@ -228,12 +228,14 @@ public:
 	AnimClipInfo actionAnimClip;
 	AnimClipInfo actionAnimShadow;
 
+	Vector2 offset{ 0,0 };
+
 	AnimationInfo() 
 	{
 	}
 
-	AnimationInfo(std::string n, AnimClipInfo action, AnimClipInfo shadow)
-		: name{ n }, actionAnimClip { action }, actionAnimShadow{ shadow }
+	AnimationInfo(std::string n, AnimClipInfo action, AnimClipInfo shadow, Vector2 o = { 0,0 })
+		: name{ n }, actionAnimClip { action }, actionAnimShadow{ shadow }, offset{ o }
 	{
 	}
 
@@ -277,5 +279,25 @@ public:
 	{
 
 	}
+
+};
+
+struct TileInfo 
+{
+public:
+
+	std::string name{ "grass" };
+	float sortOrder{ -10 };
+	AnimationInfo animInfo{ "grass", {0,1,0.0f,0,false} , {-5,0,0.0f,0,false}, { 0,0 } };
+	bool dynamicSort{ false };
+
+	TileInfo()
+		: TileInfo("grass", -10, { "grass", {0,1,0.0f,0,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false)
+	{
+	}
+
+	TileInfo(std::string n, float s, AnimationInfo a, bool d)
+		: name{ n }, sortOrder{ s }, animInfo{ a }, dynamicSort{ d }
+	{}
 
 };

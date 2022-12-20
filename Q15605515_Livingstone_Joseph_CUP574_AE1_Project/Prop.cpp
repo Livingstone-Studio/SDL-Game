@@ -13,6 +13,11 @@ Prop::Prop(Transform transform, string name, float sortOrder, AnimationInfo s, b
 	m_dynamic_sort_order = dynamicSort;
 }
 
+Prop::Prop(Transform transform, TileInfo tileInfo)
+	: Prop(transform, tileInfo.name, tileInfo.sortOrder, tileInfo.animInfo, tileInfo.dynamicSort)
+{
+}
+
 Prop::~Prop()
 {
 }
