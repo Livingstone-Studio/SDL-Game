@@ -25,6 +25,7 @@ private:
 	static vector<string> m_map;
 
 	static Vector2 m_tile_scaling;
+	static Vector2 m_tile_collider_scaling;
 
 	static float m_environment_scale;
 

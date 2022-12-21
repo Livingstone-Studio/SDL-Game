@@ -102,6 +102,19 @@ void Camera::RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObject
 	}
 }
 
+void Camera::RenderDebug(SDL_Renderer* renderer, vector<GameObject*> gameObjects)
+{
+	vector<GameObject*> sorted = SortRenderOrder(gameObjects);
+
+	for (int i = 0; i < sorted.size(); i++)
+	{
+		if (sorted[i] != nullptr)
+		{
+			sorted[i]->RenderDebug(renderer, *this);
+		}
+	}
+}
+
 vector<GameObject*> Camera::SortRenderOrder(vector<GameObject*> gameObjects)
 {
 	stable_sort(gameObjects.begin(), gameObjects.end(),

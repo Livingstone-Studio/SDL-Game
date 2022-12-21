@@ -31,6 +31,10 @@ public:
 
 	bool IsInitialized() { return m_initialized; }
 
+	bool Triggered() { return m_event_triggered; }
+	bool TriggeredEventPassed() { return m_event_triggered_already; }
+	float GetEventFrame() { return m_event_frame; }
+
 private:
 
 	bool m_initialized{ false };
@@ -39,6 +43,10 @@ private:
 
 	float m_animTimeBetween{ 1.0 };
 	float m_animTimer{ 0.0f };
+
+	float m_event_frame{ -1 };
+	bool m_event_triggered{ false };
+	bool m_event_triggered_already{ false };
 
 	int m_row{ 0 };
 	int m_spriteCount{ 0 };

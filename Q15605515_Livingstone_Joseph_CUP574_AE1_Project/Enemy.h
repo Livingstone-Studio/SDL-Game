@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Character.h"
+#include "Player.h"
 
 class Enemy : public Character
 {
@@ -16,15 +16,18 @@ public:
 
 	virtual void RenderStart(SDL_Renderer* renderer, Camera camera) override;
 
-	virtual void SetTarget(GameObject* t) { m_target = t; }
+	virtual void SetTarget(Character* t) { m_target = t; }
+
+	virtual void CollisionCheck(vector<GameObject*> gameObjects) override;
+	virtual void CollisionResponse() override;
 
 protected:
 
-	GameObject* m_target{ nullptr };
+	Character* m_target{ nullptr };
 
-	float m_attackRange{ .5f };
+	Collider m_hit_area;
 
-	CharacterAnimInfo m_charAnimInfo{ m_sprite_name,
+	CharacterAnimInfo m_charAnimInfo{ m_image_name,
 		//Idle
 		{ "idleR", {20,1,0,0,true}, {20,1,0,4,true}},
 		{ "idleL", {21,1,0,0,true}, {21,1,0,4,true} },
@@ -41,6 +44,13 @@ protected:
 		{ "attackR", {0,4,0.05f,0,false}, {0,4,0.05f,4,false} },
 		{ "attackL", {1,4,0.05f,0,false}, {1,4,0.05f,4,false} },
 		{ "attackTR", {2,4,0.05f,0,false}, {2,4,0.05f,4,false} },
-		{ "attackTL", {3,4,0.05f,0,false}, {3,4,0.05f,4,false} }
+		{ "attackTL", {3,4,0.05f,0,false}, {3,4,0.05f,4,false} },
+
+		//Hit + Death
+		{ "hitR", {8,4,0.15f,0,false}, {8,4,0.15f,4,false} },
+		{ "hitL", {9,4,0.15f,0,false}, {9,4,0.15f,4,false} },
+		{ "hitTR", {10,4,0.15f,0,false}, {10,4,0.15f,4,false} },
+		{ "hitTL", {11,4,0.15f,0,false}, {11,4,0.15f,4,false} },
+		{ "deathFR", {7,13,0.15f,0,false}, {16,13,0.15f,4,false} }
 	};
 };

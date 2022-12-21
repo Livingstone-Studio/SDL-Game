@@ -18,6 +18,8 @@
 #include "Character.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Orc.h"
+#include "Slime.h"
 
 #include <vector>
 
@@ -53,6 +55,8 @@ private:
 
 	Camera m_camera;
 
+	bool m_debug{ false };
+
 	Player* m_player_cast;
 	vector<GameObject*> m_gameobjects;
 
@@ -76,7 +80,7 @@ private:
 
 	void Close();
 
-	// TEMP
+	// DEBUG
 	void SpawnEnemy();
 	void KillEnemy();
 };

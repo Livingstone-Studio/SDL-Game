@@ -25,11 +25,16 @@ public:
 
 	bool IsCompleted() { return completed; }
 
+	bool IsTriggered() { return animClips[0].Triggered(); }
+	bool IsAlreadyTriggered() { return animClips[0].TriggeredEventPassed(); }
+
 	Vector2 GetOffset();
+
+	string GetAnimName() { return m_anim_name; }
 
 private:
 
-	string m_sprite_name{ "" };
+	string m_sprite_name__{ "" };
 
 	string m_anim_name{ "" };
 

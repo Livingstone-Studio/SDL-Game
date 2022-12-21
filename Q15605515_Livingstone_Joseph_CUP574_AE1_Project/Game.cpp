@@ -126,11 +126,20 @@ void Game::InputHandler()
         m_fullscreen = false;
     }
 
-    if (Input::GetKeyDown(SDL_SCANCODE_O))
+    if (Input::GetKeyDown(SDL_SCANCODE_F3) && !m_debug)
+    {
+        m_debug = true;
+    }
+    else if (Input::GetKeyDown(SDL_SCANCODE_F3) && m_debug)
+    {
+        m_debug = false;
+    }
+
+    if (Input::GetKeyDown(SDL_SCANCODE_O) && m_debug)
     {
         SpawnEnemy();
     }
-    else if (Input::GetKeyDown(SDL_SCANCODE_P))
+    else if (Input::GetKeyDown(SDL_SCANCODE_P) && m_debug)
     {
         KillEnemy();
     }
@@ -146,6 +155,16 @@ void Game::EventHandler()
 
     if (m_player_cast != nullptr) m_camera.Follow(m_player_cast, Time::GetDeltaTime());
 
+    // Collision Update
+    for (int j = 0; j < m_gameobjects.size(); j++)
+    {
+        if (m_gameobjects[j] != nullptr)
+        {
+            m_gameobjects[j]->CollisionCheck(m_gameobjects);
+        }
+    }
+
+    // Update
     for (int i = 0; i < m_gameobjects.size(); i++)
     {
         if (m_gameobjects[i] != nullptr)
@@ -160,6 +179,8 @@ void Game::RendererHandler()
     SDL_RenderClear(m_renderer);
 
     m_camera.RenderUpdate(m_renderer, m_gameobjects);
+
+    if (m_debug) m_camera.RenderDebug(m_renderer, m_gameobjects);
 
     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
 
@@ -194,13 +215,13 @@ void Game::Close()
 
 }
 
-// TEMP
+// DEBUG
 void Game::SpawnEnemy()
 {
-    m_gameobjects.push_back(new Enemy({ 20, -10, 5, 5 }));
-    Enemy* cast = dynamic_cast<Enemy*>(m_gameobjects[m_gameobjects.size()-1]);
+    m_gameobjects.push_back(new Slime({ 0, 0, 5, 5 }));
+    Slime* cast = dynamic_cast<Slime*>(m_gameobjects[m_gameobjects.size()-1]);
 
-    if (cast != nullptr) cast->SetTarget(m_gameobjects[0]);
+    if (cast != nullptr) cast->SetTarget(m_player_cast);
 }
 
 void Game::KillEnemy()

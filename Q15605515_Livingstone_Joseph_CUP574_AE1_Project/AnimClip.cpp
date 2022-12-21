@@ -12,6 +12,9 @@ void AnimClip::Initialize(SDL_Renderer* renderer, string imgFile, AnimClipInfo a
 	m_spriteCount = anim.spriteCount;
 	m_animTimeBetween = anim.animTimeBetween;
 	m_animTimer = 0.0f;
+	m_event_triggered = false;
+	m_event_triggered_already = false;
+	m_event_frame = anim.eventFrame;
 	m_startSpriteIndex = anim.start;
 	m_currentSpriteIndex = m_startSpriteIndex;
 	m_looping = anim.looping;
@@ -27,6 +30,9 @@ void AnimClip::SetAnimation(AnimClipInfo anim)
 	m_spriteCount = anim.spriteCount;
 	m_animTimeBetween = anim.animTimeBetween;
 	m_animTimer = 0.0f;
+	m_event_triggered = false;
+	m_event_triggered_already = false;
+	m_event_frame = anim.eventFrame;
 	m_startSpriteIndex = anim.start;
 	m_currentSpriteIndex = m_startSpriteIndex;
 	m_looping = anim.looping;
@@ -81,11 +87,25 @@ void AnimClip::SetDesRect(Transform transform)
 
 bool AnimClip::Update()
 {
+	if (m_event_triggered)
+	{
+		m_event_triggered_already = true;
+	}
+
 	m_animTimer += Time::GetDeltaTime();
 
 	if (m_animTimer >= m_animTimeBetween)
 	{
 		m_currentSpriteIndex++;
+
+		if (m_event_frame == m_currentSpriteIndex && !m_event_triggered_already)
+		{
+			m_event_triggered = true;
+		}
+		else 
+		{
+			m_event_triggered = false;
+		}
 
 		if (m_currentSpriteIndex >= m_startSpriteIndex + m_spriteCount)
 		{

@@ -5,7 +5,6 @@
 
 class Player : public Character
 {
-
 public:
 
 	Player();
@@ -20,6 +19,6 @@ public:
 
 protected:
 
-	string m_sprite_name{ "Gobbie" };
+	string m_image_name{ "Gobbie" };
 
 };

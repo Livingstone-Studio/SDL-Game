@@ -3,6 +3,7 @@
 vector<string> LevelHandler::m_map;
 float LevelHandler::m_environment_scale{ 2 };
 Vector2 LevelHandler::m_tile_scaling{ 0.65f, 0.53f };
+Vector2 LevelHandler::m_tile_collider_scaling{ 0.25f, 0.25f };
 
 TileInfo LevelHandler::m_plainsTile{ "grass", -10, { "plains", {0,1,0.0f,0,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
 TileInfo LevelHandler::m_grassTile{ "grass", -10, { "grass", {0,1,0.0f,1,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
@@ -85,46 +86,46 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
 
             case 'Z':
                 t.push_back(
-                    new Prop( transform, m_waterTiles[0]));
+                    new Prop( transform, m_waterTiles[0], true, m_tile_collider_scaling));
                 break;
             case 'X':
                 t.push_back(
-                    new Prop(transform, m_waterTiles[1]));
+                    new Prop(transform, m_waterTiles[1], true, m_tile_collider_scaling));
                 break;
             case 'C':
                 t.push_back(
-                    new Prop(transform, m_waterTiles[2]));
+                    new Prop(transform, m_waterTiles[2], true, m_tile_collider_scaling));
                 break;
             case 'V':
                 t.push_back(
-                    new Prop(transform, m_waterTiles[3]));
+                    new Prop(transform, m_waterTiles[3], true, m_tile_collider_scaling));
                 break;
             case 'A':
                 t.push_back(
-                    new Prop(transform, m_waterTiles[4]));
+                    new Prop(transform, m_waterTiles[4], true, m_tile_collider_scaling));
                 break;
             case 'S':
                 t.push_back(
-                    new Prop(transform, m_waterTiles[5]));
+                    new Prop(transform, m_waterTiles[5], true, m_tile_collider_scaling));
                 break;
             case 'D':
                 t.push_back(
-                    new Prop(transform, m_waterTiles[6]));
+                    new Prop(transform, m_waterTiles[6], true, m_tile_collider_scaling));
                 break;
 
 
 
             case 'B':
                 t.push_back(
-                    new Prop(transform, m_riverTiles[0]));
+                    new Prop(transform, m_riverTiles[0], true, m_tile_collider_scaling));
                 break;
             case 'N':
                 t.push_back(
-                    new Prop(transform, m_riverTiles[1]));
+                    new Prop(transform, m_riverTiles[1], true, m_tile_collider_scaling));
                 break;
             case 'M':
                 t.push_back(
-                    new Prop(transform, m_riverTiles[2]));
+                    new Prop(transform, m_riverTiles[2], true, m_tile_collider_scaling));
                 break;
 
 
@@ -134,7 +135,7 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
                     new Prop(transform, m_plainsTile));
                 
                 t.push_back(new Prop({ transform.position , { m_environment_scale * 2, m_environment_scale * 2 } },
-                    "tree", 0, { "tree", {0,1,0.0f,0,false} , {1,1,0.0f,0,false}, { 0,0.5f } }));
+                    "tree", 0, { "tree", {0,1,0.0f,0,false} , {1,1,0.0f,0,false}, { 0,0.5f } }, true, false, { 0.075f, 0.05f }));
                 break;
             default:
                 break;

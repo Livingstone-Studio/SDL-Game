@@ -5,11 +5,13 @@
 #include "Animation.h"
 #include "Camera.h"
 #include "Structs.h"
+#include "Collider.h"
 
 class Sprite;
 class AnimClip;
 class Animation;
 class Camera;
+class Character;
 
 class GameObject
 {
@@ -42,6 +44,9 @@ public:
 
 	virtual void RenderUpdate(SDL_Renderer* renderer, Camera camera);
 
+	virtual void RenderDebug(SDL_Renderer* renderer, Camera camera);
+
+
 	bool IsInitialized() { return m_initialized; }
 	bool IsRenderInitialized() { return m_render_initialized; }
 
@@ -50,9 +55,24 @@ public:
 
 	float m_sort_order{ 0 };
 
+	virtual void CollisionCheck(vector<GameObject*> gameObjects);
+	virtual void CollisionResponse();
+
+	virtual Vector2 GetColliderScale() { return m_collider_scale; }
+	virtual Collider GetCollider() { return m_collider; }
+
+	virtual string GetAnimName() { return m_gfx.GetAnimName(); }
+
 protected:
 
 	Transform AnimOffsetPosition();
+
+	Collider m_collider;
+	Vector2 m_collider_scale{ 1,1 };
+
+	AnimClip m_collider_debug;
+
+	vector<Collided> m_frame_collided;
 
 	bool m_dynamic_sort_order{ true };
 
@@ -63,9 +83,11 @@ protected:
 
 	bool m_deletion{ false };
 
+	float m_debug_box_scale{ 3.75f };
+
 	Transform m_transform;
 	Animation m_gfx;
 
-	string m_sprite_name{ "Orc" };
+	string m_image_name{ "Orc" };
 };
 

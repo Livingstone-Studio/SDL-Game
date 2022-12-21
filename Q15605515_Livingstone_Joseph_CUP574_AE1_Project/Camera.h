@@ -27,6 +27,7 @@ public:
 	void RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
 	void RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
 
+	void RenderDebug(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
 
 private:
 

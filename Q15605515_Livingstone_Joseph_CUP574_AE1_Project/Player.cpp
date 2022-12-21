@@ -2,18 +2,20 @@
 
 Player::Player()
 {
-
+    m_move_speed = 5.0f;
 }
 
 Player::Player(Vector2 position)
 {
 	m_transform.position = position;
+    m_move_speed = 5.0f;
 
 }
 
 Player::Player(Transform transform)
 {
 	m_transform = transform;
+    m_move_speed = 5.0f;
 }
 
 Player::~Player()
@@ -22,13 +24,14 @@ Player::~Player()
 
 void Player::RenderStart(SDL_Renderer* renderer, Camera camera)
 {
-    m_gfx.InitAnim(renderer, m_sprite_name, m_charAnimInfo.idleR);
+    m_gfx.InitAnim(renderer, m_image_name, m_char_anim_info.idleR);
 
     GameObject::RenderStart(renderer, camera);
 }
 
 void Player::InputUpdate(float deltaTime)
 {
+    if (m_death) return;
     Vector2 moveVector;
 
     if (Input::GetKey(SDL_SCANCODE_W))
@@ -53,5 +56,5 @@ void Player::InputUpdate(float deltaTime)
         Attack();
     }
 
-    SetMovementDirection(moveVector.Normalized());
+    SetMovementDirection(moveVector);
 }
