@@ -90,14 +90,16 @@ void Character::RenderDebug(SDL_Renderer* renderer, Camera camera)
 
 void Character::CollisionCheck(vector<GameObject*> gameObjects)
 {
+	m_frame_collided.clear();
+
+	if (m_death) return;
+
 	if (m_attacking && !m_gfx.IsAlreadyTriggered())
 	{
 		m_attack_frame = m_gfx.IsTriggered();
 	}
 
 	if (m_attack_frame) m_attack_collider.SetActive(true);
-
-	m_frame_collided.clear();
 
 	if (!m_collider.GetActive())
 	{
@@ -206,6 +208,7 @@ void Character::TakeDamage(int health)
 	if (m_health <= 0) 
 	{
 		m_death = true;
+
 		m_health = 0;
 	}
 	else 
@@ -227,6 +230,8 @@ void Character::Animating(SDL_Renderer* renderer)
 	if (m_death) 
 	{
 		m_gfx.ChangeAnimation(renderer, m_char_anim_info.death);
+
+		if (m_gfx.IsCompleted()) Delete();
 
 		return;
 	}

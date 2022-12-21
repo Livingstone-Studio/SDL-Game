@@ -12,11 +12,21 @@ public:
 
 	virtual void Attack() override;
 
+	virtual void Update(float deltaTime);
+
 	virtual void RenderStart(SDL_Renderer* renderer, Camera camera);
+
+	virtual void Animating(SDL_Renderer* renderer);
+
+	virtual void SetMovementDirection(Vector2 dir);
+
+	virtual void CollisionCheck(vector<GameObject*> gameObjects) override;
 
 protected:
 
 	string m_image_name{ "Slime" };
+
+	float m_range{ 0.5f };
 
 	CharacterAnimInfo m_charAnimInfo{ m_image_name,
 		//Idle

@@ -135,16 +135,23 @@ void Game::InputHandler()
         m_debug = false;
     }
 
-    if (Input::GetKeyDown(SDL_SCANCODE_O) && m_debug)
+    if (Input::GetKeyDown(SDL_SCANCODE_I) && m_debug)
     {
-        SpawnEnemy();
+        SpawnOrc();
+    }
+    else if (Input::GetKeyDown(SDL_SCANCODE_O) && m_debug)
+    {
+        SpawnSlime();
     }
     else if (Input::GetKeyDown(SDL_SCANCODE_P) && m_debug)
     {
         KillEnemy();
     }
 
-    if (m_player_cast != nullptr) m_player_cast->InputUpdate(Time::GetDeltaTime());
+    if (m_player_cast != nullptr)
+    {
+        if (!m_player_cast->MarkedForDeletion()) m_player_cast->InputUpdate(Time::GetDeltaTime());
+    }
 }
 
 void Game::EventHandler()
@@ -216,7 +223,16 @@ void Game::Close()
 }
 
 // DEBUG
-void Game::SpawnEnemy()
+
+void Game::SpawnOrc()
+{
+    m_gameobjects.push_back(new Orc({ 0, 0, 5, 5 }));
+    Orc* cast = dynamic_cast<Orc*>(m_gameobjects[m_gameobjects.size() - 1]);
+
+    if (cast != nullptr) cast->SetTarget(m_player_cast);
+}
+
+void Game::SpawnSlime()
 {
     m_gameobjects.push_back(new Slime({ 0, 0, 5, 5 }));
     Slime* cast = dynamic_cast<Slime*>(m_gameobjects[m_gameobjects.size()-1]);

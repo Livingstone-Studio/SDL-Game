@@ -42,13 +42,17 @@ void Enemy::Update(float deltaTime)
 
 void Enemy::RenderStart(SDL_Renderer* renderer, Camera camera)
 {
-	m_gfx.InitAnim(renderer, m_image_name, m_charAnimInfo.idleR);
+	m_gfx.InitAnim(renderer, m_image_name, m_char_anim_info.idleR);
 
 	GameObject::RenderStart(renderer, camera);
 }
 
 void Enemy::CollisionCheck(vector<GameObject*> gameObjects)
 {
+	m_frame_collided.clear();
+
+	if (m_death) return;
+
 	m_hit_area = m_attack_collider;
 	m_hit_area.SetActive(true);
 
@@ -58,8 +62,6 @@ void Enemy::CollisionCheck(vector<GameObject*> gameObjects)
 	}
 
 	if (m_attack_frame) m_attack_collider.SetActive(true);
-
-	m_frame_collided.clear();
 
 	if (!m_collider.GetActive())
 	{

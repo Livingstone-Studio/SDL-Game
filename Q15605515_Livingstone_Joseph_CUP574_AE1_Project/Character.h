@@ -67,11 +67,11 @@ protected:
 		{ "attackTL", {3,4,0.05f,0,false,2}, {3,4,0.05f,4,false} },
 
 		//Hit + Death
-		{ "hitR", {7,4,0.15f,0,false}, {7,4,0.15f,4,false} },
-		{ "hitL", {8,4,0.15f,0,false}, {8,4,0.15f,4,false} },
-		{ "hitTR", {9,4,0.15f,0,false}, {9,4,0.15f,4,false} },
-		{ "hitTL", {10,4,0.15f,0,false}, {10,4,0.15f,4,false} },
-		{ "deathFR", {19,13,.15f,0,false}, {18,13,.15f,4,false} }
+		{ "hitR", {7,4,0.05f,0,false}, {7,4,0.05f,4,false} },
+		{ "hitL", {8,4,0.05f,0,false}, {8,4,0.05f,4,false} },
+		{ "hitTR", {9,4,0.05f,0,false}, {9,4,0.05f,4,false} },
+		{ "hitTL", {10,4,0.05f,0,false}, {10,4,0.05f,4,false} },
+		{ "deathFR", {19,7,.05f,0,false}, {18,7,.05f,4,false} }
 	};
 
 	Collider m_attack_collider;
@@ -91,7 +91,7 @@ protected:
 
 	virtual void Animating(SDL_Renderer* renderer);
 
-	void SetMovementDirection(Vector2 dir);
+	virtual void SetMovementDirection(Vector2 dir);
 
 	virtual void Move(Vector2 moveVector);
 

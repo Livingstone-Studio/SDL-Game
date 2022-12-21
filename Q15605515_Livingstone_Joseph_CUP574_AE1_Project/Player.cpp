@@ -58,3 +58,109 @@ void Player::InputUpdate(float deltaTime)
 
     SetMovementDirection(moveVector);
 }
+
+void Player::Animating(SDL_Renderer* renderer)
+{
+	if (m_death)
+	{
+		m_gfx.ChangeAnimation(renderer, m_char_anim_info.death);
+
+		return;
+	}
+
+	if (m_attempted_frame_movement.x != 0 || m_attempted_frame_movement.y != 0) m_moving = true;
+	else m_moving = false;
+
+	if (m_attacking) m_attacking = !m_gfx.IsCompleted();
+	if (m_hit) m_hit = !m_gfx.IsCompleted();
+
+	if (!Interacting())
+	{
+		if (m_moving)
+		{
+			if (m_attempted_frame_movement.x > 0.0f) {
+
+				if (m_up)
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveTR);
+				}
+				else
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveR);
+				}
+
+				m_right = true;
+			}
+			else if (m_attempted_frame_movement.x < 0.0f) {
+
+				if (m_up)
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveTL);
+				}
+				else
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveL);
+				}
+
+				m_right = false;
+			}
+
+			if (m_attempted_frame_movement.y < 0.0f) {
+
+				if (m_right)
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveR);
+				}
+				else
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveL);
+				}
+
+				m_up = false;
+			}
+			else if (m_attempted_frame_movement.y > 0.0f) {
+
+				if (m_right)
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveTR);
+				}
+				else
+				{
+					m_gfx.ChangeAnimation(renderer, m_char_anim_info.moveTL);
+				}
+
+				m_up = true;
+			}
+		}
+		else
+		{
+			if (m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.idleR);
+			else if (!m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.idleL);
+			else if (m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.idleTR);
+			else if (!m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.idleTL);
+		}
+	}
+	else
+	{
+		if (m_hit)
+		{
+			if (m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitR);
+			else if (!m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitL);
+			else if (m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitTR);
+			else if (!m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitTL);
+		}
+		else if (m_attacking)
+		{
+			if (m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.attackR);
+			else if (!m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.attackL);
+			else if (m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.attackTR);
+			else if (!m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.attackTL);
+		}
+
+	}
+
+	if (m_right && !m_up) m_attack_collider.SetCollisionOffset({ m_attack_collider_offset.x, m_attack_collider_offset.y * -1 });
+	else if (!m_right && !m_up) m_attack_collider.SetCollisionOffset({ m_attack_collider_offset.x * -1, m_attack_collider_offset.y * -1 });
+	else if (m_right && m_up) m_attack_collider.SetCollisionOffset({ m_attack_collider_offset.x, m_attack_collider_offset.y });
+	else if (!m_right && m_up) m_attack_collider.SetCollisionOffset({ m_attack_collider_offset.x * -1, m_attack_collider_offset.y });
+}

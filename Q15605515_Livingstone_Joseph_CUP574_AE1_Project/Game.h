@@ -81,6 +81,7 @@ private:
 	void Close();
 
 	// DEBUG
-	void SpawnEnemy();
+	void SpawnOrc();
+	void SpawnSlime();
 	void KillEnemy();
 };

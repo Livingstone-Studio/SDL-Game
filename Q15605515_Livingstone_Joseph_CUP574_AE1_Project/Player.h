@@ -17,6 +17,8 @@ public:
 
 	virtual void InputUpdate(float deltaTime);
 
+	virtual void Animating(SDL_Renderer* renderer);
+
 protected:
 
 	string m_image_name{ "Gobbie" };
