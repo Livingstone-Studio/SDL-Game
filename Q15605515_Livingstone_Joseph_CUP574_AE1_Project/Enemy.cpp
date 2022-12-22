@@ -56,9 +56,9 @@ void Enemy::CollisionCheck(vector<GameObject*> gameObjects)
 	m_hit_area = m_attack_collider;
 	m_hit_area.SetActive(true);
 
-	if (m_attacking && !m_gfx.IsAlreadyTriggered())
+	if (m_attacking && !m_gfx.OneIsAlreadyTriggered())
 	{
-		m_attack_frame = m_gfx.IsTriggered();
+		m_attack_frame = m_gfx.OneIsTriggered();
 	}
 
 	if (m_attack_frame) m_attack_collider.SetActive(true);

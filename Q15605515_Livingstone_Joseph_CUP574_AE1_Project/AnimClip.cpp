@@ -14,7 +14,10 @@ void AnimClip::Initialize(SDL_Renderer* renderer, string imgFile, AnimClipInfo a
 	m_animTimer = 0.0f;
 	m_event_triggered = false;
 	m_event_triggered_already = false;
-	m_event_frame = anim.eventFrame;
+	m_event_2_triggered = false;
+	m_event_2_triggered_already = false;
+	m_event_frame[0] = anim.eventTrigger[0];
+	m_event_frame[1] = anim.eventTrigger[1];
 	m_startSpriteIndex = anim.start;
 	m_currentSpriteIndex = m_startSpriteIndex;
 	m_looping = anim.looping;
@@ -32,7 +35,10 @@ void AnimClip::SetAnimation(AnimClipInfo anim)
 	m_animTimer = 0.0f;
 	m_event_triggered = false;
 	m_event_triggered_already = false;
-	m_event_frame = anim.eventFrame;
+	m_event_2_triggered = false;
+	m_event_2_triggered_already = false;
+	m_event_frame[0] = anim.eventTrigger[0];
+	m_event_frame[1] = anim.eventTrigger[1];
 	m_startSpriteIndex = anim.start;
 	m_currentSpriteIndex = m_startSpriteIndex;
 	m_looping = anim.looping;
@@ -91,27 +97,38 @@ bool AnimClip::Update()
 	{
 		m_event_triggered_already = true;
 	}
+	if (m_event_2_triggered)
+	{
+		m_event_2_triggered_already = true;
+	}
 
 	m_animTimer += Time::GetDeltaTime();
 
 	if (m_animTimer >= m_animTimeBetween)
 	{
-		m_currentSpriteIndex++;
-
-		if (m_event_frame == m_currentSpriteIndex && !m_event_triggered_already)
+		if (m_event_frame[0] == m_currentSpriteIndex && !m_event_triggered_already)
 		{
 			m_event_triggered = true;
+		}
+		else if (m_event_frame[1] == m_currentSpriteIndex && !m_event_2_triggered_already)
+		{
+			m_event_2_triggered = true;
 		}
 		else 
 		{
 			m_event_triggered = false;
+			m_event_2_triggered = false;
 		}
+
+		m_currentSpriteIndex++;
 
 		if (m_currentSpriteIndex >= m_startSpriteIndex + m_spriteCount)
 		{
 			if (m_looping) 
 			{
 				m_currentSpriteIndex = m_startSpriteIndex;
+				m_event_triggered_already = false;
+				m_event_2_triggered_already = false;
 			}
 			else 
 			{
@@ -123,6 +140,7 @@ bool AnimClip::Update()
 
 		m_animTimer = 0.0f;
 		//DebugCurrentSpriteInfo();
+
 	}
 
 	return false;

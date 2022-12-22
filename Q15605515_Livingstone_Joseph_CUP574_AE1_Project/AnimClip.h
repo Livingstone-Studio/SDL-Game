@@ -33,7 +33,14 @@ public:
 
 	bool Triggered() { return m_event_triggered; }
 	bool TriggeredEventPassed() { return m_event_triggered_already; }
-	float GetEventFrame() { return m_event_frame; }
+
+	bool Triggered2() { return m_event_2_triggered; }
+	bool TriggeredEventPassed2() { return m_event_2_triggered_already; }
+
+	int GetEventFrameOne() { return m_event_frame[0]; }
+	int GetEventFrameTwo() { return m_event_frame[1]; }
+
+	int GetRow() { return m_row; }
 
 private:
 
@@ -44,9 +51,13 @@ private:
 	float m_animTimeBetween{ 1.0 };
 	float m_animTimer{ 0.0f };
 
-	float m_event_frame{ -1 };
+	int m_event_frame[2]{ -1,-1 };
+
 	bool m_event_triggered{ false };
 	bool m_event_triggered_already{ false };
+
+	bool m_event_2_triggered{ false };
+	bool m_event_2_triggered_already{ false };
 
 	int m_row{ 0 };
 	int m_spriteCount{ 0 };

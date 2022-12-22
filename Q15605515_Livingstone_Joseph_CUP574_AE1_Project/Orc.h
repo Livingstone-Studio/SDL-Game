@@ -22,16 +22,16 @@ protected:
 		{ "idleTL", {23,1,0,0,true}, {23,1,0,4,true} },
 
 		//Move
-		{ "moveR", {20,4,0.1f,0,true}, {20,4,0.1f,4,true} },
-		{ "moveL", {21,4,0.1f,0,true}, {21,4,0.1f,4,true} },
-		{ "moveTR", {22,4,0.1f,0,true}, {22,4,0.1f,4,true} },
-		{ "moveTL", {23,4,0.1f,0,true}, {23,4,0.1f,4,true} },
+		{ "moveR", {20,4,0.1f,0,true,0,2}, {20,4,0.1f,4,true} },
+		{ "moveL", {21,4,0.1f,0,true,0,2}, {21,4,0.1f,4,true} },
+		{ "moveTR", {22,4,0.1f,0,true,0,2}, {22,4,0.1f,4,true} },
+		{ "moveTL", {23,4,0.1f,0,true,0,2}, {23,4,0.1f,4,true} },
 
 		//Attack
-		{ "attackR", {0,4,0.15f,0,false}, {0,4,0.15f,4,false} },
-		{ "attackL", {1,4,0.15f,0,false}, {1,4,0.15f,4,false} },
-		{ "attackTR", {2,4,0.15f,0,false}, {2,4,0.15f,4,false} },
-		{ "attackTL", {3,4,0.15f,0,false}, {3,4,0.15f,4,false} },
+		{ "attackR", {0,4,0.09f,0,false,2}, {0,4,0.09f,4,false} },
+		{ "attackL", {1,4,0.09f,0,false,2}, {1,4,0.09f,4,false} },
+		{ "attackTR", {2,4,0.09f,0,false,2}, {2,4,0.09f,4,false} },
+		{ "attackTL", {3,4,0.09f,0,false,2}, {3,4,0.09f,4,false} },
 
 		//Hit + Death
 		{ "hitR", {8,4,0.15f,0,false}, {8,4,0.15f,4,false} },

@@ -17,6 +17,8 @@ public:
 
 private:
 
+	// Images
+
 	static SDL_Renderer* m_renderer;
 
 	static SDL_Texture* LoadImage(SDL_Renderer* renderer, string filePath);
@@ -29,4 +31,5 @@ private:
 
 	static SDL_Texture* m_forgotten_plains_tileset;
 	static SDL_Texture* m_forgotten_plains_tileset_props;
+
 };

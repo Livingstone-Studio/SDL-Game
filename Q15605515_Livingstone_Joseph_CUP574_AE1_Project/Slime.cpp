@@ -79,6 +79,8 @@ void Slime::Animating(SDL_Renderer* renderer)
 
 	if (!m_hit)
 	{
+		m_moving = true;
+
 		if (m_moving)
 		{
 			if (m_attempted_frame_movement.x > 0.0f) {
@@ -134,6 +136,15 @@ void Slime::Animating(SDL_Renderer* renderer)
 
 				m_up = true;
 			}
+
+			if (m_gfx.OneIsTriggered() && !m_gfx.OneIsAlreadyTriggered())
+			{
+				AudioManager::PlayEffect("slimeWalk");
+			}
+			if (m_gfx.TwoIsTriggered() && !m_gfx.TwoIsAlreadyTriggered())
+			{
+				AudioManager::PlayEffect("slimeLand");
+			}
 		}
 		else
 		{
@@ -151,6 +162,8 @@ void Slime::Animating(SDL_Renderer* renderer)
 			else if (!m_right && !m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitL);
 			else if (m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitTR);
 			else if (!m_right && m_up) m_gfx.ChangeAnimation(renderer, m_char_anim_info.hitTL);
+
+			m_moving = false;
 		}
 	}
 

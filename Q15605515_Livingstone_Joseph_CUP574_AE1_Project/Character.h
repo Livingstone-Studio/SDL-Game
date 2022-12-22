@@ -55,10 +55,10 @@ protected:
 		{ "idleTL", {23,1,0,0,true}, {23,1,0,4,true} },
 
 		//Move
-		{ "moveR", {20,4,0.1f,0,true}, {20,4,0.1f,4,true} },
-		{ "moveL", {21,4,0.1f,0,true}, {21,4,0.1f,4,true} },
-		{ "moveTR", {22,4,0.1f,0,true}, {22,4,0.1f,4,true} },
-		{ "moveTL", {23,4,0.1f,0,true}, {23,4,0.1f,4,true} },
+		{ "moveR", {20,4,0.1f,0,true,0,2}, {20,4,0.1f,4,true} },
+		{ "moveL", {21,4,0.1f,0,true,0,2}, {21,4,0.1f,4,true} },
+		{ "moveTR", {22,4,0.1f,0,true,0,2}, {22,4,0.1f,4,true} },
+		{ "moveTL", {23,4,0.1f,0,true,0,2}, {23,4,0.1f,4,true} },
 
 		//Attack
 		{ "attackR", {0,4,0.05f,0,false,2}, {0,4,0.05f,4,false} },
@@ -95,7 +95,8 @@ protected:
 
 	virtual void Move(Vector2 moveVector);
 
-	virtual void Attack() { m_attacking = true; }
+	virtual void Attack();
+
 	bool Interacting() { return (m_attacking || m_hit || m_death); }
 
 };

@@ -162,6 +162,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
@@ -182,6 +183,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="Time.h" />

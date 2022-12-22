@@ -25,7 +25,9 @@ void Animation::ChangeAnimation(SDL_Renderer* renderer, AnimationInfo animInfo)
 		{
 			m_anim_name = animInfo.name;
 			m_offset = animInfo.offset;
+
 			animClips[0].SetAnimation(animInfo.actionAnimClip);
+
 			animClips[1].SetAnimation(animInfo.actionAnimShadow);
 		}
 		else 
@@ -43,7 +45,9 @@ void Animation::Update()
 {
 	for (int i = 0; i < 2; i++)
 	{
-		bool clipComp = animClips[1 - i].Update();
+		//cout << i << ":" << endl;
+
+		bool clipComp = animClips[i].Update();
 
 		if (i == 0) completed = clipComp;
 	}

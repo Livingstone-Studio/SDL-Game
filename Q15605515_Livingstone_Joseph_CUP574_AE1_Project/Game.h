@@ -20,6 +20,7 @@
 #include "Enemy.h"
 #include "Orc.h"
 #include "Slime.h"
+#include "AudioManager.h"
 
 #include <vector>
 
@@ -39,8 +40,6 @@ public:
 	Game();
 
 	int Execute();
-
-	static void Quit();
 
 	static SDL_Renderer* GetRenderer() { return m_renderer; }
 

@@ -25,8 +25,13 @@ public:
 
 	bool IsCompleted() { return completed; }
 
-	bool IsTriggered() { return animClips[0].Triggered(); }
-	bool IsAlreadyTriggered() { return animClips[0].TriggeredEventPassed(); }
+	bool OneIsTriggered() { return animClips[0].Triggered(); }
+	bool OneIsAlreadyTriggered() { return animClips[0].TriggeredEventPassed(); }
+
+	bool TwoIsTriggered() { return animClips[0].Triggered2(); }
+	bool TwoIsAlreadyTriggered() { return animClips[0].TriggeredEventPassed2(); }
+
+	int GetRow() { return animClips[0].GetRow(); }
 
 	Vector2 GetOffset();
 

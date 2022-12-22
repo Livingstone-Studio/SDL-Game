@@ -36,10 +36,10 @@ protected:
 		{ "idleTL", {4,1,0,0,true}, {4,1,0,4,true} },
 
 		//Move
-		{ "moveR", {9,4,0.1f,0,true}, {9,4,0.1f,4,true} },
-		{ "moveL", {10,4,0.1f,0,true}, {10,4,0.1f,4,true} },
-		{ "moveTR", {11,4,0.1f,0,true}, {11,4,0.1f,4,true} },
-		{ "moveTL", {12,4,0.1f,0,true}, {12,4,0.1f,4,true} },
+		{ "moveR", {9,4,0.1f,0,true,1,3}, {9,4,0.1f,4,true} },
+		{ "moveL", {10,4,0.1f,0,true,1,3}, {10,4,0.1f,4,true} },
+		{ "moveTR", {11,4,0.1f,0,true,1,3}, {11,4,0.1f,4,true} },
+		{ "moveTL", {12,4,0.1f,0,true,1,3}, {12,4,0.1f,4,true} },
 
 		//Attack
 		{ "attackR", {0,4,0.05f,0,false}, {0,4,0.05f,4,false} },

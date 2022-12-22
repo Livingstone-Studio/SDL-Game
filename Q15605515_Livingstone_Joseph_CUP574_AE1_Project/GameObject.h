@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Structs.h"
 #include "Collider.h"
+#include "AudioManager.h"
 
 class Sprite;
 class AnimClip;

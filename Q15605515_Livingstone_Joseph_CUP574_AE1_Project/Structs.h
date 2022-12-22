@@ -208,15 +208,15 @@ public:
 	float animTimeBetween{ 1.0f };
 	int start{ 0 };
 	bool looping{ true };
-	int eventFrame{ -1 };
+	int eventTrigger[2]{ -1, -1 };
 
 	AnimClipInfo()
 		: AnimClipInfo(0, 0, 1.0f, 0, true, -1)
 	{
 	}
 
-	AnimClipInfo(int r, int sC, float t, int s, bool l, int e = -1)
-		: row{ r }, spriteCount{ sC }, animTimeBetween{ t }, start{ s }, looping{ l }, eventFrame{ e }
+	AnimClipInfo(int r, int sC, float t, int s, bool l, int e = -1, int i = -1)
+		: row{ r }, spriteCount{ sC }, animTimeBetween{ t }, start{ s }, looping{ l }, eventTrigger{ e, i }
 	{
 	}
 
@@ -233,14 +233,12 @@ public:
 
 	Vector2 offset{ 0,0 };
 
-	int eventTrigger{ -1 };
-
 	AnimationInfo() 
 	{
 	}
 
-	AnimationInfo(std::string n, AnimClipInfo action, AnimClipInfo shadow, Vector2 o = { 0,0 }, int e = -1)
-		: name{ n }, actionAnimClip { action }, actionAnimShadow{ shadow }, offset{ o }, eventTrigger{ e }
+	AnimationInfo(std::string n, AnimClipInfo action, AnimClipInfo shadow, Vector2 o = { 0,0 })
+		: name{ n }, actionAnimClip { action }, actionAnimShadow{ shadow }, offset{ o }
 	{
 	}
 

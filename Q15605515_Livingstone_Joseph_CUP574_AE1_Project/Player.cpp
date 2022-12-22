@@ -131,6 +131,11 @@ void Player::Animating(SDL_Renderer* renderer)
 
 				m_up = true;
 			}
+
+			if ((m_gfx.OneIsTriggered() && !m_gfx.OneIsAlreadyTriggered()) || (m_gfx.TwoIsTriggered() && !m_gfx.TwoIsAlreadyTriggered()))
+			{
+				AudioManager::PlayEffect("charWalk");
+			}
 		}
 		else
 		{

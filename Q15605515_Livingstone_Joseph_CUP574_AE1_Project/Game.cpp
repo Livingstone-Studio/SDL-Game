@@ -34,6 +34,11 @@ void Game::Setup()
         cout << "Failed to intialise SDL_Image. Error: " << SDL_GetError() << endl;
     }
 
+    if (Mix_Init(MIX_INIT_MP3) < 0) 
+    {
+        cout << "Failed to initialise SDL_Mixer. Error: " << Mix_GetError() << endl;
+    }
+
     m_run = true;
 
     Input::Initialize();
@@ -43,6 +48,7 @@ void Game::Setup()
 
     AssetLoader::Initialize(m_renderer);
 
+    AudioManager::Initialize();
 
     m_gameobjects.push_back(new Player({ 0, 0, 5, 5 }));
     
@@ -198,6 +204,7 @@ void Game::Close()
 {
     Input::Cleanup();
     AssetLoader::Cleanup();
+    AudioManager::Cleanup();
 
     for (int i = 0; i < m_gameobjects.size(); i++)
     {

@@ -56,6 +56,12 @@ void Character::Move(Vector2 moveVector)
 	m_transform.position += moveVector;
 }
 
+void Character::Attack()
+{
+	if (m_attacking == false) AudioManager::PlayEffect("charAttack");
+	m_attacking = true;
+}
+
 void Character::RenderStart(SDL_Renderer* renderer, Camera camera)
 {
 	m_gfx.InitAnim(renderer, m_image_name, m_char_anim_info.idleR);
@@ -94,9 +100,9 @@ void Character::CollisionCheck(vector<GameObject*> gameObjects)
 
 	if (m_death) return;
 
-	if (m_attacking && !m_gfx.IsAlreadyTriggered())
+	if (m_attacking && !m_gfx.OneIsAlreadyTriggered())
 	{
-		m_attack_frame = m_gfx.IsTriggered();
+		m_attack_frame = m_gfx.OneIsTriggered();
 	}
 
 	if (m_attack_frame) m_attack_collider.SetActive(true);
@@ -204,16 +210,17 @@ void Character::TakeDamage(int health)
 	if (m_hit || m_death || !HitCooldown()) return;
 
 	m_health -= health;
-
+		
 	if (m_health <= 0) 
 	{
 		m_death = true;
-
+		AudioManager::PlayEffect("charDeath");
 		m_health = 0;
 	}
 	else 
 	{
 		m_hit = true;
+		AudioManager::PlayEffect("charHit");
 		m_invun_timer = 0.0f;
 	}
 }
@@ -299,6 +306,13 @@ void Character::Animating(SDL_Renderer* renderer)
 
 				m_up = true;
 			}
+			
+
+			if ((m_gfx.OneIsTriggered() && !m_gfx.OneIsAlreadyTriggered()) || (m_gfx.TwoIsTriggered() && !m_gfx.TwoIsAlreadyTriggered()))
+			{
+				AudioManager::PlayEffect("charWalk");
+			}
+
 		}
 		else
 		{
