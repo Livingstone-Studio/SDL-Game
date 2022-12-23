@@ -91,6 +91,11 @@ void AnimClip::SetDesRect(Transform transform)
 	SetDesRect(transform.position.x, transform.position.y, transform.scale.x, transform.scale.y);
 }
 
+void AnimClip::SetSrcRect(Transform transform)
+{
+	m_spritesheet.SetSrcRect(transform);
+}
+
 bool AnimClip::Update()
 {
 	if (m_event_triggered)

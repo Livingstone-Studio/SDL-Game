@@ -11,6 +11,8 @@ SDL_Texture* AssetLoader::m_slime_spritesheet = nullptr;
 SDL_Texture* AssetLoader::m_forgotten_plains_tileset = nullptr;
 SDL_Texture* AssetLoader::m_forgotten_plains_tileset_props = nullptr;
 
+SDL_Texture* AssetLoader::m_ui_bars = nullptr;
+
 void AssetLoader::Initialize(SDL_Renderer* renderer)
 {
     m_renderer = renderer;
@@ -23,6 +25,9 @@ void AssetLoader::Initialize(SDL_Renderer* renderer)
 
     m_forgotten_plains_tileset = LoadImage(renderer, "Assets/Tilesets/Minifantasy_ForgottenPlainsTiles.png");
     m_forgotten_plains_tileset_props = LoadImage(renderer, "Assets/Tilesets/Minifantasy_ForgottenPlainsProps.png");
+
+    m_ui_bars = LoadImage(renderer, "Assets/UI/Minifantasy_GuiBars.png");
+
 }
 
 void AssetLoader::Cleanup()
@@ -34,6 +39,8 @@ void AssetLoader::Cleanup()
     if (m_forgotten_plains_tileset != nullptr) SDL_DestroyTexture(m_forgotten_plains_tileset);
     if (m_forgotten_plains_tileset_props != nullptr) SDL_DestroyTexture(m_forgotten_plains_tileset_props);
 
+    if (m_ui_bars != nullptr) SDL_DestroyTexture(m_ui_bars);
+
     if (m_debug_sheet != nullptr) SDL_DestroyTexture(m_debug_sheet);
 }
 
@@ -44,7 +51,9 @@ SDL_Texture* AssetLoader::GetCharacterSheet(string name)
     else if (name == "Slime") return m_slime_spritesheet;
     else if (name == "grass") return m_forgotten_plains_tileset;
     else if (name == "tree") return m_forgotten_plains_tileset_props;
+    else if (name == "UIBars") return m_ui_bars;
     else if (name == "Debug") return m_debug_sheet;
+    else cout << "No Sheet Found" << endl;
 
     return nullptr;
 }

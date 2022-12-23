@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Input.h"
 
+#include "Canvas.h"
+
 #include <vector>
 #include <algorithm>
 
@@ -19,8 +21,11 @@ public:
 	Vector2 SetCameraSize(Vector2 size) { m_transform.scale = size; }
 
 	Transform ConvertedToScreenSpace(Transform t);
+	Transform ConvertToUISpace(Transform t);
 
 	void Follow(GameObject* target, float deltaTime);
+
+	void Start();
 
 	void Update( Vector2 defaultCamSize, Vector2 currentCamSize);
 
@@ -30,6 +35,8 @@ public:
 	void RenderDebug(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
 
 private:
+
+	Canvas canvas;
 
 	vector<GameObject*> SortRenderOrder(vector<GameObject*> gameObjects);
 

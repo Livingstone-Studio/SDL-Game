@@ -66,3 +66,9 @@ Vector2 Animation::GetOffset()
 	return m_offset;
 }
 
+void Animation::UpdateSRC(Transform t, Transform y)
+{
+	animClips[0].SetSrcRect(t);
+	animClips[1].SetSrcRect(y);
+}
+

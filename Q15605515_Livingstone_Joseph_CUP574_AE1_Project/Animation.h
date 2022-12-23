@@ -37,6 +37,8 @@ public:
 
 	string GetAnimName() { return m_anim_name; }
 
+	void UpdateSRC(Transform t, Transform y);
+
 private:
 
 	string m_sprite_name__{ "" };

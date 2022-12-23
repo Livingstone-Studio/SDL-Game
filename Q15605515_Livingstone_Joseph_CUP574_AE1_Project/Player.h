@@ -19,6 +19,8 @@ public:
 
 	virtual void Animating(SDL_Renderer* renderer);
 
+	virtual void ToggleNoClip();
+
 protected:
 
 	string m_image_name{ "Gobbie" };

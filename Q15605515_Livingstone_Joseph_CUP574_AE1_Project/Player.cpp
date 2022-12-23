@@ -169,3 +169,8 @@ void Player::Animating(SDL_Renderer* renderer)
 	else if (m_right && m_up) m_attack_collider.SetCollisionOffset({ m_attack_collider_offset.x, m_attack_collider_offset.y });
 	else if (!m_right && m_up) m_attack_collider.SetCollisionOffset({ m_attack_collider_offset.x * -1, m_attack_collider_offset.y });
 }
+
+void Player::ToggleNoClip()
+{
+	m_collider.SetActive(!m_collider.GetActive());
+}

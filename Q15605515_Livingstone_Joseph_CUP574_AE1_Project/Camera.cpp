@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include "LevelHandler.h"
+
 Camera::Camera()
 {
 }
@@ -40,6 +42,39 @@ Transform Camera::ConvertedToScreenSpace(Transform t)
 	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale / m_scale };
 }
 
+Transform Camera::ConvertToUISpace(Transform t)
+{
+	Vector2 offset;
+
+	// Get The Normalized Value To Scale To Fit Current Resolution.
+
+	Vector2 resolutionScale = m_default_window_size / m_window_size;
+
+	m_transform.scale = resolutionScale * m_scale;
+
+	// Camera Range (r-l, top-bottom)
+	Vector2 range = { m_transform.scale.x - (-m_transform.scale.x), m_transform.scale.y - (-m_transform.scale.y) };
+
+	// Get UI element offset from center of window
+
+	offset = t.position * resolutionScale;
+
+	// Shift so object position min = 0;
+	offset.x = offset.x - (-m_transform.scale.x * resolutionScale.x);
+	offset.y = offset.y - (-m_transform.scale.y * resolutionScale.y);
+
+	// Normalise the offset.
+	offset.x = offset.x / (range.x);
+	offset.y = offset.y / (range.y);
+
+	offset.x = offset.x / (resolutionScale.x);
+	offset.y = offset.y / (resolutionScale.y);
+
+	// Apply Normalised To Screen.
+
+	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale / m_scale };
+}
+
 void Camera::Follow(GameObject* target, float deltaTime)
 {
 	Vector2 moveVector = target->GetTransform().position - m_transform.position;
@@ -52,6 +87,11 @@ void Camera::Follow(GameObject* target, float deltaTime)
 
 		m_transform.position += moveVector;
 	}
+}
+
+void Camera::Start()
+{
+	canvas.Start();
 }
 
 void Camera::Update( Vector2 defaultCamSize, Vector2 currentCamSize)
@@ -76,6 +116,7 @@ void Camera::Update( Vector2 defaultCamSize, Vector2 currentCamSize)
 		SetScale(4);
 	}
 
+	canvas.Update();
 }
 
 void Camera::RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects)
@@ -87,6 +128,8 @@ void Camera::RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects
 			if (!gameObjects[i]->IsRenderInitialized())	gameObjects[i]->RenderStart(renderer, *this);
 		}
 	}
+
+	canvas.RenderStart(renderer);
 }
 
 void Camera::RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObjects)
@@ -100,6 +143,8 @@ void Camera::RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObject
 			sorted[i]->RenderUpdate(renderer, *this);
 		}
 	}
+
+	canvas.RenderUpdate(renderer, *this);
 }
 
 void Camera::RenderDebug(SDL_Renderer* renderer, vector<GameObject*> gameObjects)

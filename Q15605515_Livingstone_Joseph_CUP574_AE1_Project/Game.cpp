@@ -69,6 +69,8 @@ void Game::FrameInit()
         }
     }
 
+    m_camera.Start();
+
     m_camera.RenderStart(m_renderer, m_gameobjects);
 }
 
@@ -140,6 +142,12 @@ void Game::InputHandler()
     {
         m_debug = false;
     }
+
+    if (Input::GetKeyDown(SDL_SCANCODE_N) && m_debug && m_player_cast != nullptr)
+    {
+        m_player_cast->ToggleNoClip();
+    }
+
 
     if (Input::GetKeyDown(SDL_SCANCODE_I) && m_debug)
     {

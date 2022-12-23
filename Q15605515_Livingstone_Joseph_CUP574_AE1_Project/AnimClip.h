@@ -25,6 +25,8 @@ public:
 	void SetDesRect(float x, float y, float xScale = 1, float yScale = 1);
 	void SetDesRect(Transform transform);
 
+	void SetSrcRect(Transform transform);
+
 	bool Update();
 
 	void RenderUpdate(SDL_Renderer* renderer, Transform transform);

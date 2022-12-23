@@ -41,6 +41,7 @@ public:
 	void SetDesRect(Vector2 position, Vector2 scale);
 
 	void SetSrcRect(Vector2 position);
+	void SetSrcRect(Transform t);
 	
 	void SetOffset(Vector2 offset) { m_offset = offset;  }
 
@@ -66,5 +67,7 @@ private:
 	int imageWidth{ 0 };
 	int imageHeight{ 0 };
 
-};
 
+	bool m_custom_size{ false };
+	Vector2 m_ui;
+};

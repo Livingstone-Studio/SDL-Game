@@ -2,6 +2,8 @@
 
 #include <string>
 
+using namespace std;
+
 class GameObject;
 
 struct Vector2
