@@ -16,7 +16,7 @@ class UIElement
 public:
 
 	UIElement();
-	UIElement(Transform transform, Transform t);
+	UIElement(Transform animDES, Transform animOneSRC, Transform animTwoSRC);
 	
 	~UIElement();
 

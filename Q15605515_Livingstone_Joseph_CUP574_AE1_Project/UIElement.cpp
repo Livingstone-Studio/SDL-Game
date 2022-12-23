@@ -8,8 +8,8 @@ UIElement::UIElement()
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }
 
-UIElement::UIElement(Transform transform, Transform t)
-	: m_src_one{transform}, m_src_two{ t }
+UIElement::UIElement(Transform animDES, Transform animOneSRC, Transform animTwoSRC)
+	: m_transform{animDES}, m_src_one {	animOneSRC }, m_src_two{ animTwoSRC }
 {
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }

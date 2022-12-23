@@ -48,7 +48,7 @@ Transform Camera::ConvertToUISpace(Transform t)
 
 	// Get The Normalized Value To Scale To Fit Current Resolution.
 
-	Vector2 resolutionScale = m_default_window_size / m_window_size;
+	Vector2 resolutionScale = m_window_size / m_default_window_size;
 
 	m_transform.scale = resolutionScale * m_scale;
 
@@ -57,7 +57,7 @@ Transform Camera::ConvertToUISpace(Transform t)
 
 	// Get UI element offset from center of window
 
-	offset = t.position * resolutionScale;
+	offset = t.position * resolutionScale * m_scale;
 
 	// Shift so object position min = 0;
 	offset.x = offset.x - (-m_transform.scale.x * resolutionScale.x);
@@ -72,7 +72,7 @@ Transform Camera::ConvertToUISpace(Transform t)
 
 	// Apply Normalised To Screen.
 
-	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale / m_scale };
+	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale };
 }
 
 void Camera::Follow(GameObject* target, float deltaTime)
