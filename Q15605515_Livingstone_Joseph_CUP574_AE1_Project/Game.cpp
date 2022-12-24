@@ -58,7 +58,12 @@ void Game::Setup()
 
     m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
 
-    m_gameobjects.push_back(new Collectable({ 7, 0, 1, 1 }));
+    m_gameobjects.push_back(new Collectable({ 7, 0, 1, 1 }, Potato));
+    m_gameobjects.push_back(new Collectable({ 7, 1, 1, 1 }, PotatoSeeds));
+    m_gameobjects.push_back(new Collectable({ 8, 0, 1, 1 }, Cauli));
+    m_gameobjects.push_back(new Collectable({ 8, 1, 1, 1 }, PotatoSeeds));
+    m_gameobjects.push_back(new Collectable({ 9, 0, 1, 1 }, CauliSeeds));
+    m_gameobjects.push_back(new Collectable({ 9, 1, 1, 1 }, Potato));
 }
 
 void Game::FrameInit()

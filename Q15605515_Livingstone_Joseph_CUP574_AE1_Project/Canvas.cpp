@@ -50,15 +50,11 @@ Canvas::Canvas()
 	m_in_game_menu_elements.push_back(new UIElement(TopLeft, { -.6975f, .8f, 4.5f, 4.5f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }));
 
 	// Icons
-	m_in_game_menu_elements.push_back(new Button(TopLeft, { -.85f, .8f, 2.75f, 2.75f }, { 0, 256, 16, 16 }, { 0, 0, 0, 0 }));
-	m_in_game_menu_elements.push_back(new Button(TopLeft, { -.75f, .8f, 2.75f, 2.75f }, { 0, 240, 16, 16 }, { 0, 0, 0, 0 }));
-	m_in_game_menu_elements.push_back(new Button(TopLeft, { -.65f, .8f, 2.75f, 2.75f }, { 0, 208, 16, 16 }, { 0, 0, 0, 0 }));
-	m_in_game_menu_elements.push_back(new Button(TopLeft, { -.55f, .8f, 2.75f, 2.75f }, { 0, 224, 16, 16 }, { 0, 0, 0, 0 }));
+	m_in_game_menu_elements.push_back(new MuteButton(TopLeft, { -.85f, .8f, 2.75f, 2.75f }, { 0, 256, 16, 16 }, { 0, 0, 0, 0 }));
+	m_in_game_menu_elements.push_back(new SaveButton(TopLeft, { -.75f, .8f, 2.75f, 2.75f }, { 0, 240, 16, 16 }, { 0, 0, 0, 0 }));
+	m_in_game_menu_elements.push_back(new SettingsButton(TopLeft, { -.65f, .8f, 2.75f, 2.75f }, { 0, 208, 16, 16 }, { 0, 0, 0, 0 }));
+	m_in_game_menu_elements.push_back(new SystemSettings(TopLeft, { -.55f, .8f, 2.75f, 2.75f }, { 0, 224, 16, 16 }, { 0, 0, 0, 0 }));
 
-
-	//m_in_game_menu_elements.push_back(new Button(Middle, { 0, .9f, 7, 6 }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
-	//m_in_game_menu_elements.push_back(new Button(Middle, { 0, .0f, 7, 6 }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
-	//m_in_game_menu_elements.push_back(new Button(Middle, { 0, -.9f, 7, 6 }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
 
 }
 

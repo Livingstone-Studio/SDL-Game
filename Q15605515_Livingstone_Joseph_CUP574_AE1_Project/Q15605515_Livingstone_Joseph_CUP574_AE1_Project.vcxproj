@@ -161,12 +161,16 @@
     <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maths.cpp" />
+    <ClCompile Include="MuteButton.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prop.cpp" />
+    <ClCompile Include="SaveButton.cpp" />
+    <ClCompile Include="SettingsButton.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SystemSettings.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UIElement.cpp" />
   </ItemGroup>
@@ -186,13 +190,17 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="LevelHandler.h" />
     <ClInclude Include="Maths.h" />
+    <ClInclude Include="MuteButton.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prop.h" />
+    <ClInclude Include="SaveButton.h" />
+    <ClInclude Include="SettingsButton.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Structs.h" />
+    <ClInclude Include="SystemSettings.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UIElement.h" />
   </ItemGroup>

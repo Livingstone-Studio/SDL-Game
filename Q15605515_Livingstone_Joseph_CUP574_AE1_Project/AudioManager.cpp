@@ -1,5 +1,7 @@
 #include "AudioManager.h"
 
+bool AudioManager::m_active{ true };
+
 Mix_Music* AudioManager::m_music{ nullptr };
 
 Mix_Chunk* AudioManager::m_character_attack{ nullptr };
@@ -9,6 +11,8 @@ Mix_Chunk* AudioManager::m_character_death{ nullptr };
 Mix_Chunk* AudioManager::m_character_walk{ nullptr };
 
 Mix_Chunk* AudioManager::m_slime_walk{ nullptr };
+Mix_Chunk* AudioManager::m_pickup_collectable{ nullptr };
+
 Mix_Chunk* AudioManager::m_slime_land{ nullptr };
 
 void AudioManager::Initialize()
@@ -31,6 +35,8 @@ void AudioManager::Initialize()
 	m_slime_walk = Mix_LoadWAV("Assets/Audio/SlimeWalk.wav");
 	m_slime_land = Mix_LoadWAV("Assets/Audio/SlimeLand.wav");
 
+	m_pickup_collectable = Mix_LoadWAV("Assets/Audio/CollectablePickup.wav");
+
 	if (m_music != nullptr) Mix_PlayMusic(m_music, -1);
 	else cout << "Can't find music." << endl;
 }
@@ -47,12 +53,16 @@ void AudioManager::Cleanup()
 	Mix_FreeChunk(m_slime_walk);
 	Mix_FreeChunk(m_slime_land);
 
+	Mix_FreeChunk(m_pickup_collectable);
+
 	Mix_CloseAudio();
 	Mix_Quit();
 }
 
 void AudioManager::PlayEffect(string name)
 {
+	if (!m_active) return;
+
 	Mix_Chunk* track = nullptr;
 
 	// Character Attacking Sounds
@@ -68,10 +78,20 @@ void AudioManager::PlayEffect(string name)
 	else if (name == "slimeWalk" && m_slime_walk != nullptr) track = m_slime_walk;
 	else if (name == "slimeLand" && m_slime_land != nullptr) track = m_slime_land;
 
+	else if (name == "collectable" && m_pickup_collectable != nullptr) track = m_pickup_collectable;
+
 	if (track != nullptr)
 	{
 		Mix_VolumeChunk(track, 50);
 		Mix_PlayChannel(-1, track, 0);
 	}
 	else cout << "Can't find sound effect." << endl;
+}
+
+void AudioManager::ToggleSound()
+{
+	m_active = !m_active;
+
+	if (m_active) Mix_VolumeMusic(32);
+	else Mix_VolumeMusic(0);
 }

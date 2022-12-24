@@ -17,9 +17,13 @@ public:
 
 	static void PlayEffect(string name);
 
+	static void ToggleSound();
+
 private:
 
 	// Audio
+
+	static bool m_active;
 
 	static Mix_Music* m_music;
 
@@ -31,6 +35,8 @@ private:
 
 	static Mix_Chunk* m_slime_walk;
 	static Mix_Chunk* m_slime_land;
+
+	static Mix_Chunk* m_pickup_collectable;
 
 
 };

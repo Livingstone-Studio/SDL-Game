@@ -5,6 +5,10 @@
 
 #include "UIElement.h"
 #include "Button.h"
+#include "MuteButton.h"
+#include "SaveButton.h"
+#include "SettingsButton.h"
+#include "SystemSettings.h"
 
 class Camera;
 
@@ -35,5 +39,7 @@ private:
 	vector<UIElement*> m_hud_elements;
 
 	vector<UIElement*> m_in_game_menu_elements;
+
+	//vector<UIElement*> m_in_game_menu_elements;
 
 };
