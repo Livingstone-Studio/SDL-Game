@@ -4,8 +4,13 @@
 #include "Input.h"
 
 #include "UIElement.h"
+#include "Button.h"
 
 class Camera;
+
+enum CurrentUI {
+	MainMenu, HUD, InGameMenu
+};
 
 class Canvas
 { 
@@ -19,12 +24,16 @@ public:
 
 	void RenderStart(SDL_Renderer* renderer);
 
-	void Update();
+	void Update(Camera camera);
 
 	void RenderUpdate(SDL_Renderer* renderer, Camera camera);
 
 private:
 
-	vector<UIElement*> m_elements;
+	CurrentUI m_current_ui{ HUD };
+	
+	vector<UIElement*> m_hud_elements;
+
+	vector<UIElement*> m_in_game_menu_elements;
 
 };

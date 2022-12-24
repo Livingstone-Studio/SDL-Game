@@ -20,6 +20,7 @@
 #include "Enemy.h"
 #include "Orc.h"
 #include "Slime.h"
+#include "Collectable.h"
 #include "AudioManager.h"
 
 #include <vector>

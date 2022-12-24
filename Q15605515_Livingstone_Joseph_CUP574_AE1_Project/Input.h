@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 
+#include "Structs.h"
+
 static class Input
 {
 public:
@@ -20,9 +22,15 @@ public:
 
 	static void Cleanup();
 
+	static Vector2 GetMousePosition();
+
+	static bool LeftMousePress() { return m_left_mouse_press_frame; }
+
 private:
 
 	static const Uint8* m_keyboardState;
 	static const Uint8* m_previousKeyboardState;
+
+	static bool m_left_mouse_press_frame;
 
 };

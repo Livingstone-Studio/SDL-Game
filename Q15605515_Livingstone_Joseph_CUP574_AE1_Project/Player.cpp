@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Collectable.h"
+
 Player::Player()
 {
     m_move_speed = 5.0f;
@@ -57,6 +59,47 @@ void Player::InputUpdate(float deltaTime)
     }
 
     SetMovementDirection(moveVector);
+}
+
+void Player::Update(float deltaTime)
+{
+	if (Input::GetKey(SDL_SCANCODE_LSHIFT) && m_energy > 0)
+	{
+		m_energy -= deltaTime * m_sprint_usage_multiplier;
+
+		m_move_speed = m_move_sprint;
+
+		if (m_energy < 0) m_energy = 0;
+	}
+	else 
+	{
+		m_move_speed = m_default_move_speed;
+	}
+
+	if (!Input::GetKey(SDL_SCANCODE_LSHIFT) && m_energy < m_max_energy && (m_hungry > 0 || m_thirst > 0))
+	{
+		float regenAmount = deltaTime * m_energy_regen_multiplier;
+
+		if (m_hungry > 0) 
+		{
+			regenAmount *= m_hungry_usage_multiplier;
+			m_hungry -= deltaTime * m_hungry_usage_multiplier;
+		}
+		if (m_thirst > 0) 
+		{
+			regenAmount *= m_thirst_usage_multiplier;
+			m_thirst -= deltaTime * m_thirst_usage_multiplier;
+		}
+
+		if (m_hungry < 0) m_hungry = 0;
+		if (m_thirst < 0) m_thirst = 0;
+
+		m_energy += regenAmount;
+
+		if (m_energy > m_max_energy) m_energy = m_max_energy;
+	}
+
+	Character::Update(deltaTime);
 }
 
 void Player::Animating(SDL_Renderer* renderer)
@@ -173,4 +216,24 @@ void Player::Animating(SDL_Renderer* renderer)
 void Player::ToggleNoClip()
 {
 	m_collider.SetActive(!m_collider.GetActive());
+}
+
+void Player::Eat(float amount)
+{
+	m_hungry += amount;
+
+	if (m_hungry > m_max_hungry) m_hungry = m_max_hungry;
+}
+
+void Player::Drink(float amount)
+{
+	m_thirst += amount;
+
+	if (m_thirst > m_max_thirst) m_thirst = m_max_thirst;
+}
+
+bool Player::AddToInventory(Collectable c)
+{
+	cout << "Added collectable to inventory" << endl;
+	return true;
 }

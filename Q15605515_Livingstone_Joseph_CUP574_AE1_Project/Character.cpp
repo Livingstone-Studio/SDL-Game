@@ -169,7 +169,7 @@ void Character::CollisionResponse()
 {
 	for (int i = 0; i < m_frame_collided.size(); i++)
 	{
-		if (!m_frame_collided[i].info.trigger)
+		if (!m_frame_collided[i].info.trigger && !m_frame_collided[i].gameObject->GetCollider().IsTrigger())
 		{
 			//cout << "H: " << m_frame_collided[i].info.hor << ",V: " << m_frame_collided[i].info.vert << endl;
 

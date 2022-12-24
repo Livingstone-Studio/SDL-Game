@@ -57,6 +57,8 @@ void Game::Setup()
     vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/TestLevel.txt");
 
     m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
+
+    m_gameobjects.push_back(new Collectable({ 7, 0, 1, 1 }));
 }
 
 void Game::FrameInit()
@@ -202,6 +204,8 @@ void Game::RendererHandler()
     m_camera.RenderUpdate(m_renderer, m_gameobjects);
 
     if (m_debug) m_camera.RenderDebug(m_renderer, m_gameobjects);
+
+    m_camera.RenderUpdateUI(m_renderer, m_camera);
 
     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
 

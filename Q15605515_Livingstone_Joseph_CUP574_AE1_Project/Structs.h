@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -24,6 +25,11 @@ public:
 	{
 
 	};
+
+	Vector2 Absolute()
+	{
+		return { abs(x) ,abs(y) };
+	}
 
 	float Magnitude()
 	{

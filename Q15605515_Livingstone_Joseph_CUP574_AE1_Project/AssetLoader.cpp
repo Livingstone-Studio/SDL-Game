@@ -11,6 +11,8 @@ SDL_Texture* AssetLoader::m_slime_spritesheet = nullptr;
 SDL_Texture* AssetLoader::m_forgotten_plains_tileset = nullptr;
 SDL_Texture* AssetLoader::m_forgotten_plains_tileset_props = nullptr;
 
+SDL_Texture* AssetLoader::m_collectables_spritesheet = nullptr;
+
 SDL_Texture* AssetLoader::m_ui_bars = nullptr;
 
 void AssetLoader::Initialize(SDL_Renderer* renderer)
@@ -22,6 +24,7 @@ void AssetLoader::Initialize(SDL_Renderer* renderer)
     m_gobbie_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_CreaturesGoblinAnimations+Shadows.png");
     m_orc_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_CreaturesWildOrcAnimations+Shadows.png");
     m_slime_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_CreaturesBlueSlimeAnimations+Shadows.png");
+    m_collectables_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_FarmSeedsAndCrops.png");
 
     m_forgotten_plains_tileset = LoadImage(renderer, "Assets/Tilesets/Minifantasy_ForgottenPlainsTiles.png");
     m_forgotten_plains_tileset_props = LoadImage(renderer, "Assets/Tilesets/Minifantasy_ForgottenPlainsProps.png");
@@ -39,6 +42,8 @@ void AssetLoader::Cleanup()
     if (m_forgotten_plains_tileset != nullptr) SDL_DestroyTexture(m_forgotten_plains_tileset);
     if (m_forgotten_plains_tileset_props != nullptr) SDL_DestroyTexture(m_forgotten_plains_tileset_props);
 
+    if (m_collectables_spritesheet != nullptr) SDL_DestroyTexture(m_collectables_spritesheet);
+
     if (m_ui_bars != nullptr) SDL_DestroyTexture(m_ui_bars);
 
     if (m_debug_sheet != nullptr) SDL_DestroyTexture(m_debug_sheet);
@@ -51,9 +56,12 @@ SDL_Texture* AssetLoader::GetCharacterSheet(string name)
     else if (name == "Slime") return m_slime_spritesheet;
     else if (name == "grass") return m_forgotten_plains_tileset;
     else if (name == "tree") return m_forgotten_plains_tileset_props;
+    else if (name == "Collectables") return m_collectables_spritesheet;
     else if (name == "UIBars") return m_ui_bars;
     else if (name == "Debug") return m_debug_sheet;
     else cout << "No Sheet Found" << endl;
+
+    if (m_collectables_spritesheet == nullptr) cout << name << endl;
 
     return nullptr;
 }

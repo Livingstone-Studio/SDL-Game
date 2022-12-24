@@ -8,8 +8,8 @@ UIElement::UIElement()
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }
 
-UIElement::UIElement(Transform animDES, Transform animOneSRC, Transform animTwoSRC)
-	: m_transform{animDES}, m_src_one {	animOneSRC }, m_src_two{ animTwoSRC }
+UIElement::UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC)
+	: m_anchor_point{ anchorPoint }, m_transform{ animDES }, m_src_one{ animOneSRC }, m_src_two{ animTwoSRC }
 {
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }
@@ -30,9 +30,9 @@ void UIElement::RenderStart(SDL_Renderer* renderer)
 	m_render_initialized = true;
 }
 
-void UIElement::Update()
+void UIElement::Update(Camera camera)
 {
-	if (m_render_initialized && !m_deletion)
+	if (m_render_initialized && !m_deletion && m_active)
 	{
 		m_gfx.Update();
 	}
@@ -40,8 +40,8 @@ void UIElement::Update()
 
 void UIElement::RenderUpdate(SDL_Renderer* renderer, Camera camera)
 {
-	if (m_render_initialized && !m_deletion)
+	if (m_render_initialized && !m_deletion && m_active)
 	{
-		m_gfx.RenderUpdate(renderer, camera.ConvertToUISpace(m_transform));
+		m_gfx.RenderUpdate(renderer, camera.ConvertToUISpace(m_anchor_point, m_transform));
 	}
 }

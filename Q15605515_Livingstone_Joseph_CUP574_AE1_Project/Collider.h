@@ -18,6 +18,7 @@ public:
 	virtual CollisionInfo CollisionCheck(bool trigger, Transform c1, Transform c2);
 
 	bool IsTrigger() { return m_trigger; }
+	void SetTrigger(bool trigger) { m_trigger = trigger; }
 
 	void SetCollisionOffset(Vector2 o) { m_offset = o; }
 	Vector2 GetCollisionOffset() { return m_offset; }

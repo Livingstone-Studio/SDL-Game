@@ -42,7 +42,7 @@ Transform Camera::ConvertedToScreenSpace(Transform t)
 	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale / m_scale };
 }
 
-Transform Camera::ConvertToUISpace(Transform t)
+Transform Camera::ConvertToUISpace(AnchorPosition aP, Transform t)
 {
 	Vector2 offset;
 
@@ -55,9 +55,51 @@ Transform Camera::ConvertToUISpace(Transform t)
 	// Camera Range (r-l, top-bottom)
 	Vector2 range = { m_transform.scale.x - (-m_transform.scale.x), m_transform.scale.y - (-m_transform.scale.y) };
 
+	Vector2 pos;
+
+	switch (aP) 
+	{
+	case TopLeft:
+		pos = { -range.x, range.y };
+		break;
+	case Top:
+		pos = { 0, range.y };
+		break;
+	case TopRight:
+		pos = { range.x, range.y };
+		break;
+	case Left:
+		pos = { -range.x, 0 };
+		break;
+	case Middle:
+		pos = { 0, 0 };
+		break;
+	case Right:
+		pos = { range.x, 0 };
+		break;
+	case BottomLeft:
+		pos = { -range.x, -range.y };
+		break;
+	case Bottom:
+		pos = { 0, -range.y };
+		break;
+	case BottomRight:
+		pos = { range.x, -range.y };
+		break;
+	}
+
+	Vector2 window_scaling;
+
+	window_scaling = pos / (m_scale * 2);
+
+	window_scaling = window_scaling.Absolute();
+
 	// Get UI element offset from center of window
 
-	offset = t.position * resolutionScale * m_scale;
+	if (window_scaling.x == 0) window_scaling.x = 1;
+	if (window_scaling.y == 0) window_scaling.y = 1;
+
+	offset = t.position * window_scaling * resolutionScale * m_scale;
 
 	// Shift so object position min = 0;
 	offset.x = offset.x - (-m_transform.scale.x * resolutionScale.x);
@@ -72,7 +114,7 @@ Transform Camera::ConvertToUISpace(Transform t)
 
 	// Apply Normalised To Screen.
 
-	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale };
+	return { { (m_window_size.x * offset.x), (m_window_size.y - (m_window_size.y * offset.y))}, t.scale * resolutionScale };
 }
 
 void Camera::Follow(GameObject* target, float deltaTime)
@@ -116,7 +158,7 @@ void Camera::Update( Vector2 defaultCamSize, Vector2 currentCamSize)
 		SetScale(4);
 	}
 
-	canvas.Update();
+	canvas.Update(*this);
 }
 
 void Camera::RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects)
@@ -143,7 +185,10 @@ void Camera::RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObject
 			sorted[i]->RenderUpdate(renderer, *this);
 		}
 	}
+}
 
+void Camera::RenderUpdateUI(SDL_Renderer* renderer, Camera camera)
+{
 	canvas.RenderUpdate(renderer, *this);
 }
 

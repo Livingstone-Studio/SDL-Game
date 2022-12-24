@@ -21,7 +21,7 @@ public:
 	Vector2 SetCameraSize(Vector2 size) { m_transform.scale = size; }
 
 	Transform ConvertedToScreenSpace(Transform t);
-	Transform ConvertToUISpace(Transform t);
+	Transform ConvertToUISpace(AnchorPosition aP, Transform t);
 
 	void Follow(GameObject* target, float deltaTime);
 
@@ -31,8 +31,13 @@ public:
 
 	void RenderStart(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
 	void RenderUpdate(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
+	void RenderUpdateUI(SDL_Renderer* renderer, Camera camera);
 
 	void RenderDebug(SDL_Renderer* renderer, vector<GameObject*> gameObjects);
+
+	Transform GetTransform() { return m_transform; }
+
+	Vector2 GetCurrentWindow() { return m_window_size; }
 
 private:
 
