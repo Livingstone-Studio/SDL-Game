@@ -72,3 +72,8 @@ void Animation::UpdateSRC(Transform t, Transform y)
 	animClips[1].SetSrcRect(y);
 }
 
+void Animation::SetCustomScaleAnimTwo(Vector2 newScale)
+{
+	animClips[1].SetCustomScale(newScale);
+}
+

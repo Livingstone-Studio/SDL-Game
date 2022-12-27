@@ -24,6 +24,14 @@ Player::~Player()
 {
 }
 
+void Player::InitializeHUD(vector<Slider*> elements)
+{
+	m_health_bar = elements[0];
+	m_energy_bar = elements[1];
+	m_thirst_bar = elements[2];
+	m_hunger_bar = elements[3];
+}
+
 void Player::RenderStart(SDL_Renderer* renderer, Camera camera)
 {
     m_gfx.InitAnim(renderer, m_image_name, m_char_anim_info.idleR);
@@ -97,7 +105,18 @@ void Player::Update(float deltaTime)
 		m_energy += regenAmount;
 
 		if (m_energy > m_max_energy) m_energy = m_max_energy;
+
+
+		if (m_hunger_bar != nullptr) m_hunger_bar->SetSize(m_hungry / m_max_hungry);
+		else cout << "No bar" << endl;
+
+		if (m_thirst_bar != nullptr) m_thirst_bar->SetSize(m_thirst / m_max_thirst);
+		else cout << "No bar" << endl;
 	}
+
+
+	if (m_energy_bar != nullptr) m_energy_bar->SetSize(m_energy / m_max_energy);
+	else cout << "No bar" << endl;
 
 	Character::Update(deltaTime);
 }
@@ -223,6 +242,9 @@ void Player::Eat(float amount)
 	m_hungry += amount;
 
 	if (m_hungry > m_max_hungry) m_hungry = m_max_hungry;
+
+	if (m_hunger_bar != nullptr) m_hunger_bar->SetSize(m_hungry/m_max_hungry);
+	else cout << "No bar" << endl;
 }
 
 void Player::Drink(float amount)
@@ -230,10 +252,23 @@ void Player::Drink(float amount)
 	m_thirst += amount;
 
 	if (m_thirst > m_max_thirst) m_thirst = m_max_thirst;
+
+	if (m_thirst_bar != nullptr) m_thirst_bar->SetSize(m_thirst / m_max_thirst);
+	else cout << "No bar" << endl;
 }
 
 bool Player::AddToInventory(Collectable c)
 {
 	cout << "Added collectable to inventory" << endl;
 	return true;
+}
+
+void Player::TakeDamage(int health)
+{
+
+	Character::TakeDamage(health);
+
+
+	if (m_health_bar != nullptr) m_health_bar->SetSize((float)m_health / (float)m_max_health);
+	else cout << "No bar" << endl;
 }

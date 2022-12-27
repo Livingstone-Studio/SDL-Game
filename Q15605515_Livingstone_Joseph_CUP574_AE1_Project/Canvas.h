@@ -9,7 +9,9 @@
 #include "SaveButton.h"
 #include "SettingsButton.h"
 #include "SystemSettings.h"
+#include "Slider.h"
 
+class Player;
 class Camera;
 
 enum CurrentUI {
@@ -32,6 +34,8 @@ public:
 
 	void RenderUpdate(SDL_Renderer* renderer, Camera camera);
 
+	void InitializePlayerHUD(Player* player);
+
 private:
 
 	CurrentUI m_current_ui{ HUD };
@@ -40,6 +44,6 @@ private:
 
 	vector<UIElement*> m_in_game_menu_elements;
 
-	//vector<UIElement*> m_in_game_menu_elements;
+	vector<Slider*> m_sliders;
 
 };

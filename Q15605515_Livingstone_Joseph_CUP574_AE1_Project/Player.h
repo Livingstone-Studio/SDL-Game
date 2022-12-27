@@ -15,6 +15,8 @@ public:
 
 	~Player();
 
+	virtual void InitializeHUD(vector<Slider*> elements);
+
 	virtual void RenderStart(SDL_Renderer* renderer, Camera camera);
 
 	virtual void InputUpdate(float deltaTime);
@@ -29,6 +31,8 @@ public:
 	virtual void Drink(float amount);
 
 	virtual bool AddToInventory(Collectable c);
+
+	virtual void TakeDamage(int health) override;
 
 protected:
 
@@ -50,4 +54,8 @@ protected:
 
 	string m_image_name{ "Gobbie" };
 
+	Slider* m_health_bar{ nullptr };
+	Slider* m_energy_bar{ nullptr };
+	Slider* m_thirst_bar{ nullptr };
+	Slider* m_hunger_bar{ nullptr };
 };

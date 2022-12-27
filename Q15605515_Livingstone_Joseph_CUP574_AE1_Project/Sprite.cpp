@@ -83,8 +83,8 @@ void Sprite::SetDesRect(float x, float y, float xScale, float yScale)
 		m_desRect.h = BASE_SPRITE_HEIGHT * yScale;
 	}
 
-	m_desRect.x = x - m_desRect.w/2;
-	m_desRect.y = y - m_desRect.h/2;
+	m_desRect.x = x - m_desRect.w / 2;
+	m_desRect.y = y - m_desRect.h / 2;
 }
 
 void Sprite::SetDesRect(Vector2 position, float xScale, float yScale)

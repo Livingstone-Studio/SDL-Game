@@ -39,6 +39,9 @@ public:
 
 	void UpdateSRC(Transform t, Transform y);
 
+	void SetCustomScaleAnimTwo(Vector2 newScale);
+
+
 private:
 
 	string m_sprite_name__{ "" };

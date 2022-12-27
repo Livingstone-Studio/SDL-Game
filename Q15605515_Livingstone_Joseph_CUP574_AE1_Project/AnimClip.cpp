@@ -153,6 +153,11 @@ bool AnimClip::Update()
 
 void AnimClip::RenderUpdate(SDL_Renderer* renderer, Transform transform)
 {
+	if (m_custom_scale.x > 0 && m_custom_scale.y > 0)
+	{
+		transform.scale *= m_custom_scale;
+	}
+
 	SetDesRect(transform);
 
 	SDL_Rect src = GetSrcRect();
@@ -160,4 +165,14 @@ void AnimClip::RenderUpdate(SDL_Renderer* renderer, Transform transform)
 
 	SDL_RenderCopy(renderer, GetSprite(), &src, &des);
 
+}
+
+void AnimClip::SetCustomScale(Vector2 newScale)
+{
+
+	m_custom_scale = newScale;
+	
+	m_custom_scale.x = SDL_clamp(m_custom_scale.x, 0.001f, 1.0f);
+	m_custom_scale.y = SDL_clamp(m_custom_scale.y, 0.001f, 1.0f);
+	
 }

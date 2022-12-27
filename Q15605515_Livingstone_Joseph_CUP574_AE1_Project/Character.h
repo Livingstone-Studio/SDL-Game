@@ -25,7 +25,7 @@ public:
 	virtual void CollisionCheck(vector<GameObject*> gameObjects) override;	
 	virtual void CollisionResponse() override;
 
-	void TakeDamage(int health);
+	virtual void TakeDamage(int health);
 
 	bool IsDead() { return m_death; }
 

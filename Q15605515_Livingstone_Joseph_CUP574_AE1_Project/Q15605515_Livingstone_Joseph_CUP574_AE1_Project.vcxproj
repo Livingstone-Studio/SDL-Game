@@ -167,6 +167,7 @@
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="SaveButton.cpp" />
     <ClCompile Include="SettingsButton.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Prop.h" />
     <ClInclude Include="SaveButton.h" />
     <ClInclude Include="SettingsButton.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Sprite.h" />

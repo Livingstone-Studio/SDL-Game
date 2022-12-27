@@ -44,7 +44,11 @@ public:
 
 	int GetRow() { return m_row; }
 
+	void SetCustomScale(Vector2 newScale);
+
 private:
+
+	Vector2 m_custom_scale{ -1,-1 };
 
 	bool m_initialized{ false };
 

@@ -64,6 +64,8 @@ void Game::Setup()
     m_gameobjects.push_back(new Collectable({ 8, 1, 1, 1 }, PotatoSeeds));
     m_gameobjects.push_back(new Collectable({ 9, 0, 1, 1 }, CauliSeeds));
     m_gameobjects.push_back(new Collectable({ 9, 1, 1, 1 }, Potato));
+
+    m_camera.InitializePlayerHUD(m_player_cast);
 }
 
 void Game::FrameInit()
