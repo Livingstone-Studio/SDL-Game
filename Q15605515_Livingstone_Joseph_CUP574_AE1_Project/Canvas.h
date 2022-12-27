@@ -9,13 +9,15 @@
 #include "SaveButton.h"
 #include "SettingsButton.h"
 #include "SystemSettings.h"
+#include "DebugButton.h"
+#include "ReturnToMenuButton.h"
 #include "Slider.h"
 
 class Player;
 class Camera;
 
 enum CurrentUI {
-	MainMenu, HUD, InGameMenu
+	MainMenu, HUD, InGameMenu, SystemMenu
 };
 
 class Canvas
@@ -46,4 +48,7 @@ private:
 
 	vector<Slider*> m_sliders;
 
+	vector<UIElement*> m_syspanel_elements;
+
+	vector<UIElement*> m_debug_elements;
 };

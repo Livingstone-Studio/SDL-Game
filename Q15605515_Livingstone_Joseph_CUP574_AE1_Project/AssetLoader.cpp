@@ -1,5 +1,7 @@
 #include "AssetLoader.h"
 
+TTF_Font* AssetLoader::m_retro = nullptr;
+
 SDL_Renderer* AssetLoader::m_renderer = nullptr;
 
 SDL_Texture* AssetLoader::m_debug_sheet = nullptr;
@@ -19,6 +21,10 @@ void AssetLoader::Initialize(SDL_Renderer* renderer)
 {
     m_renderer = renderer;
     
+    m_retro = TTF_OpenFont("Assets/Fonts/retro/retro.ttf", 32);
+
+    if (m_retro == nullptr) cout << "TTF failed to load font. Error: " << TTF_GetError() << endl;
+
     m_debug_sheet = LoadImage(renderer, "Assets/Debug/DebugShapes.png");
     
     m_gobbie_spritesheet = LoadImage(renderer, "Assets/SpriteSheets/Minifantasy_CreaturesGoblinAnimations+Shadows.png");
@@ -35,6 +41,8 @@ void AssetLoader::Initialize(SDL_Renderer* renderer)
 
 void AssetLoader::Cleanup()
 {
+    if (m_retro != nullptr) TTF_CloseFont(m_retro);
+
     if (m_gobbie_spritesheet != nullptr) SDL_DestroyTexture(m_gobbie_spritesheet);
     if (m_orc_spritesheet != nullptr) SDL_DestroyTexture(m_orc_spritesheet);
     if (m_slime_spritesheet != nullptr) SDL_DestroyTexture(m_slime_spritesheet);
@@ -47,6 +55,7 @@ void AssetLoader::Cleanup()
     if (m_ui_bars != nullptr) SDL_DestroyTexture(m_ui_bars);
 
     if (m_debug_sheet != nullptr) SDL_DestroyTexture(m_debug_sheet);
+
 }
 
 SDL_Texture* AssetLoader::GetCharacterSheet(string name)

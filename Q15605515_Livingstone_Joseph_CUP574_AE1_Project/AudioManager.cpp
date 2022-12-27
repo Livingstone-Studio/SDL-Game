@@ -15,6 +15,10 @@ Mix_Chunk* AudioManager::m_pickup_collectable{ nullptr };
 
 Mix_Chunk* AudioManager::m_slime_land{ nullptr };
 
+Mix_Chunk* AudioManager::m_button_hover_start{ nullptr };
+Mix_Chunk* AudioManager::m_button_hover_stop{ nullptr };
+Mix_Chunk* AudioManager::m_button_press{ nullptr };
+
 void AudioManager::Initialize()
 {
 	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 2048) < 0) 
@@ -37,6 +41,10 @@ void AudioManager::Initialize()
 
 	m_pickup_collectable = Mix_LoadWAV("Assets/Audio/CollectablePickup.wav");
 
+	m_button_hover_start = Mix_LoadWAV("Assets/Audio/ButtonHoverStart.wav");
+	m_button_hover_stop = Mix_LoadWAV("Assets/Audio/ButtonHoverEnd.wav");
+	m_button_press = Mix_LoadWAV("Assets/Audio/ButtonPress.wav");
+
 	if (m_music != nullptr) Mix_PlayMusic(m_music, -1);
 	else cout << "Can't find music." << endl;
 }
@@ -54,6 +62,10 @@ void AudioManager::Cleanup()
 	Mix_FreeChunk(m_slime_land);
 
 	Mix_FreeChunk(m_pickup_collectable);
+
+	Mix_FreeChunk(m_button_hover_start);
+	Mix_FreeChunk(m_button_hover_stop);
+	Mix_FreeChunk(m_button_press);
 
 	Mix_CloseAudio();
 	Mix_Quit();
@@ -79,6 +91,12 @@ void AudioManager::PlayEffect(string name)
 	else if (name == "slimeLand" && m_slime_land != nullptr) track = m_slime_land;
 
 	else if (name == "collectable" && m_pickup_collectable != nullptr) track = m_pickup_collectable;
+
+	// Button
+	else if (name == "hoverStart" && m_button_hover_start != nullptr) track = m_button_hover_start;
+	else if (name == "hoverStop" && m_button_hover_stop != nullptr) track = m_button_hover_stop;
+
+	else if (name == "press" && m_button_press != nullptr) track = m_button_press;
 
 	if (track != nullptr)
 	{

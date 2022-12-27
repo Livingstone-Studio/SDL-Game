@@ -38,5 +38,8 @@ private:
 
 	static Mix_Chunk* m_pickup_collectable;
 
+	static Mix_Chunk* m_button_hover_start;
+	static Mix_Chunk* m_button_hover_stop;
+	static Mix_Chunk* m_button_press;
 
 };

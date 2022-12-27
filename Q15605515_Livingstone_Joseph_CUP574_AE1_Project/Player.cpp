@@ -265,9 +265,7 @@ bool Player::AddToInventory(Collectable c)
 
 void Player::TakeDamage(int health)
 {
-
 	Character::TakeDamage(health);
-
 
 	if (m_health_bar != nullptr) m_health_bar->SetSize((float)m_health / (float)m_max_health);
 	else cout << "No bar" << endl;

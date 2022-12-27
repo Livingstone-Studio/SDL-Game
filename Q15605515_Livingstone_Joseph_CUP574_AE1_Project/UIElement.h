@@ -22,7 +22,7 @@ class UIElement
 public:
 
 	UIElement();
-	UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC);
+	UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text = "");
 	
 	~UIElement();
 
@@ -35,6 +35,8 @@ public:
 	virtual void Update(Camera camera);
 
 	virtual void RenderUpdate(SDL_Renderer* renderer, Camera camera);
+
+	virtual void RenderText(SDL_Renderer* renderer, Camera camera, string text);
 
 	virtual Transform GetTransform() { return m_transform; }
 
@@ -49,7 +51,13 @@ public:
 	void SetActive(bool s) { m_active = s; }
 	bool IsActive() { return m_active; }
 
+	void SetText(string text) { m_text = text; }
+
 protected:
+
+	string m_text{ "" };
+
+	Vector2 m_text_offset{ 0,0 };
 
 	bool m_active{ true };
 

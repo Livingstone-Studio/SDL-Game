@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <string>
 #include <iostream>
 
@@ -15,7 +16,13 @@ public:
 
 	static SDL_Texture* GetCharacterSheet(string name);
 
+	static TTF_Font* GetRetroFont() { return m_retro; }
+
 private:
+
+	// Fonts
+
+	static TTF_Font* m_retro;
 
 	// Images
 

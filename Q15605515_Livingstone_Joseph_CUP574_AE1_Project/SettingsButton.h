@@ -10,5 +10,6 @@ public:
 	SettingsButton(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC);
 
 	virtual void PressButton() override;
+
 };
 

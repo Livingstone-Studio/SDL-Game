@@ -5,24 +5,74 @@
 Button::Button()
 	: UIElement()
 {
+	m_default_scale = m_transform.scale;
+	m_scale = m_default_scale;
 }
 
 Button::Button(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC)
 	: UIElement(anchorPoint, animDES, animOneSRC, animTwoSRC)
 {
+	m_default_scale = m_transform.scale;
+	m_scale = m_default_scale;
 }
 
 void Button::Update(Camera camera)
 {
-	if (Input::LeftMousePress()) 
+	if (CheckMouseOnButton(camera))
 	{
-		if (CheckMouseOnButton(camera))
+		if (!m_hovering) 
 		{
-			PressButton();
+			// Play hover sound / swap sprite to slightly smaller scaled
+			AudioManager::PlayEffect("hoverStart");
+			m_scale = m_hover_scale;
 		}
-	}	
+		else if (m_pressed) 
+		{
+			m_scale = m_hover_scale;
+			m_pressed = false;
+		}
+		m_hovering = true;
+
+
+	}
+	else
+	{
+		if (m_hovering)
+		{
+			// Play stop hover sound / swap sprite to default scaled
+			AudioManager::PlayEffect("hoverStop");
+			m_scale = m_default_scale;
+		}
+
+		m_hovering = false;
+	}
+
+	if (Input::LeftMousePress() && m_hovering) 
+	{
+		PressButton();
+		// Play press sound / swap sprite to smallest scaled
+		AudioManager::PlayEffect("press");
+
+		m_scale = m_pressed_scale;
+
+		m_pressed = true;
+	}
 
 	UIElement::Update(camera);
+}
+
+void Button::RenderUpdate(SDL_Renderer* renderer, Camera camera)
+{
+	if (m_render_initialized && !m_deletion && m_active)
+	{
+		Transform t = m_transform;
+
+		t.scale = m_scale;
+
+		m_gfx.RenderUpdate(renderer, camera.ConvertToUISpace(m_anchor_point, t));
+
+		RenderText(renderer, camera, "");
+	}
 }
 
 bool Button::CheckMouseOnButton(Camera camera)

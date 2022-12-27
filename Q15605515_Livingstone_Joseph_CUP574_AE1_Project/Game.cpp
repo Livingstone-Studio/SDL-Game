@@ -1,6 +1,7 @@
 #include "Game.h"
 
 bool Game::m_run;
+bool Game::m_debug;
 
 SDL_Window* Game::m_window;
 SDL_Renderer* Game::m_renderer;
@@ -37,6 +38,11 @@ void Game::Setup()
     if (Mix_Init(MIX_INIT_MP3) < 0) 
     {
         cout << "Failed to initialise SDL_Mixer. Error: " << Mix_GetError() << endl;
+    }
+
+    if (TTF_Init() < 0)
+    {
+        cout << "Failed to initialise SDL_TTF. Error: " << TTF_GetError() << endl;
     }
 
     m_run = true;
@@ -143,15 +149,6 @@ void Game::InputHandler()
         m_fullscreen = false;
     }
 
-    if (Input::GetKeyDown(SDL_SCANCODE_F3) && !m_debug)
-    {
-        m_debug = true;
-    }
-    else if (Input::GetKeyDown(SDL_SCANCODE_F3) && m_debug)
-    {
-        m_debug = false;
-    }
-
     if (Input::GetKeyDown(SDL_SCANCODE_N) && m_debug && m_player_cast != nullptr)
     {
         m_player_cast->ToggleNoClip();
@@ -243,6 +240,10 @@ void Game::Close()
     SDL_DestroyRenderer(m_renderer);
 
     m_renderer = nullptr;
+
+    TTF_Quit();
+
+    IMG_Quit();
 
     SDL_Quit();
 

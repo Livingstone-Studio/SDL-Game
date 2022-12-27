@@ -44,9 +44,16 @@ public:
 
 	static SDL_Renderer* GetRenderer() { return m_renderer; }
 
+	static void ToggleDebug() {	m_debug = !m_debug;	}
+
+	static void Quit() { m_run = false; }
+
+	static bool DebugMode() { return m_debug; }
+
 private:
 
 	static bool m_run;
+	static bool m_debug;
 
 	static SDL_Window* m_window;
 	static SDL_Renderer* m_renderer;
@@ -55,7 +62,6 @@ private:
 
 	Camera m_camera;
 
-	bool m_debug{ false };
 
 	Player* m_player_cast;
 	vector<GameObject*> m_gameobjects;

@@ -39,6 +39,8 @@ public:
 
 	Vector2 GetCurrentWindow() { return m_window_size; }
 
+	Vector2 GetWindowNormalized() { return m_window_size / m_default_window_size; }
+
 	void InitializePlayerHUD(Player* player) { canvas.InitializePlayerHUD(player); }
 
 private:
