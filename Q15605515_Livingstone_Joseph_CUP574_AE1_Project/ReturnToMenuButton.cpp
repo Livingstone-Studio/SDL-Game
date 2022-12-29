@@ -14,5 +14,5 @@ ReturnToMenuButton::ReturnToMenuButton(AnchorPosition anchorPoint, Transform ani
 
 void ReturnToMenuButton::PressButton()
 {
-	Game::Quit();
+	Game::ReturnToMenu();
 }

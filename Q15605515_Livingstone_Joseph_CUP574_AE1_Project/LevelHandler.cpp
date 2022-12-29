@@ -5,6 +5,8 @@ float LevelHandler::m_environment_scale{ 2 };
 Vector2 LevelHandler::m_tile_scaling{ 0.65f, 0.53f };
 Vector2 LevelHandler::m_tile_collider_scaling{ 0.25f, 0.25f };
 
+TileInfo LevelHandler::m_player_gfx{ "grass", -5, { "player", {0,1,0.0f,24,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
+
 TileInfo LevelHandler::m_plainsTile{ "grass", -10, { "plains", {0,1,0.0f,0,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
 TileInfo LevelHandler::m_grassTile{ "grass", -10, { "grass", {0,1,0.0f,1,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
 
@@ -38,6 +40,8 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
     ifstream file(levelPath);
 
     string fileText;
+
+    m_map.clear();
 
     while (getline(file, fileText)) 
     {
@@ -136,6 +140,13 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
                 
                 t.push_back(new Prop({ transform.position , { m_environment_scale * 2, m_environment_scale * 2 } },
                     "tree", 0, { "tree", {0,1,0.0f,0,false} , {1,1,0.0f,0,false}, { 0,0.5f } }, true, false, { 0.075f, 0.05f }));
+                break;
+            case '@':
+                t.push_back(
+                    new Prop(
+                        transform, m_grassTile));
+                t.push_back(new Prop(
+                    transform, m_player_gfx));
                 break;
             default:
                 break;

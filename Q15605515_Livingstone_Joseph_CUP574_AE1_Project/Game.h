@@ -34,23 +34,38 @@ class Character;
 class Player;
 class Enemy;
 
+enum GameState {
+	SMainMenu, Gameplay
+};
+
 class Game
 {
 public:
 
 	Game();
 
-	int Execute();
+	void Execute();
+
+	void GameExecute();
 
 	static SDL_Renderer* GetRenderer() { return m_renderer; }
 
 	static void ToggleDebug() {	m_debug = !m_debug;	}
 
-	static void Quit() { m_run = false; }
+	static void Play();
+	static void ReturnToMenu();
+
+	static void Quit() { m_main_menu = false; }
 
 	static bool DebugMode() { return m_debug; }
 
 private:
+
+	static GameState m_game_state;
+
+	static bool m_main_menu;
+
+	static bool m_menu_first_frame;
 
 	static bool m_run;
 	static bool m_debug;
@@ -72,6 +87,10 @@ private:
 
 	void Setup();
 
+	void AppLoop();
+
+	void GameSetup();
+
 	void FrameInit();
 
 	void GameLoop();
@@ -83,6 +102,8 @@ private:
 	void EventHandler();
 
 	void RendererHandler();
+
+	void GameClose();
 
 	void Close();
 

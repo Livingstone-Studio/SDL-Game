@@ -11,6 +11,7 @@
 #include "SystemSettings.h"
 #include "DebugButton.h"
 #include "ReturnToMenuButton.h"
+#include "PlayButton.h"
 #include "Slider.h"
 
 class Player;
@@ -38,10 +39,14 @@ public:
 
 	void InitializePlayerHUD(Player* player);
 
+	void ChangeState(CurrentUI state) { m_current_ui = state; }
+
 private:
 
 	CurrentUI m_current_ui{ HUD };
 	
+	vector<UIElement*> m_main_menu_elements;
+
 	vector<UIElement*> m_hud_elements;
 
 	vector<UIElement*> m_in_game_menu_elements;

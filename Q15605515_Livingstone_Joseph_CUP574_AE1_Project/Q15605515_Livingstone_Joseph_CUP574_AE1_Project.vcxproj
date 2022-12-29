@@ -164,6 +164,7 @@
     <ClCompile Include="Maths.cpp" />
     <ClCompile Include="MuteButton.cpp" />
     <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="ReturnToMenuButton.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Maths.h" />
     <ClInclude Include="MuteButton.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="PlayButton.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="ReturnToMenuButton.h" />

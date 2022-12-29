@@ -141,23 +141,6 @@ void Camera::Update( Vector2 defaultCamSize, Vector2 currentCamSize)
 	m_default_window_size = defaultCamSize;
 	m_window_size = currentCamSize;
 
-	if (Input::GetKeyDown(SDL_SCANCODE_1))
-	{
-		SetScale(1);
-	}
-	if (Input::GetKeyDown(SDL_SCANCODE_2))
-	{
-		SetScale(2);
-	}
-	if (Input::GetKeyDown(SDL_SCANCODE_3))
-	{
-		SetScale(3);
-	}
-	if (Input::GetKeyDown(SDL_SCANCODE_4))
-	{
-		SetScale(4);
-	}
-
 	canvas.Update(*this);
 }
 

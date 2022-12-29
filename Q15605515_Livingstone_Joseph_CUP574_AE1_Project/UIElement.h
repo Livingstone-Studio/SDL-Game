@@ -22,7 +22,7 @@ class UIElement
 public:
 
 	UIElement();
-	UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text = "");
+	UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text = "", Vector2 text_scaling = { 1,1 });
 	
 	~UIElement();
 
@@ -73,6 +73,8 @@ protected:
 
 	Transform m_src_one{ 0,0,10,10 };
 	Transform m_src_two{ 0,0,10,10 };
+
+	Vector2 m_text_scaling{ 1,1 };
 
 };
 

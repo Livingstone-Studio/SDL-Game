@@ -29,6 +29,8 @@ private:
 
 	static float m_environment_scale;
 
+	static TileInfo m_player_gfx;
+
 	static TileInfo m_plainsTile;
 	static TileInfo m_grassTile;
 

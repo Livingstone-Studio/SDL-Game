@@ -18,7 +18,8 @@ public:
 
 	~Camera();
 
-	Vector2 SetCameraSize(Vector2 size) { m_transform.scale = size; }
+	void SetCameraSize(Vector2 size) { m_transform.scale = size; }
+	void SetCameraPosition(Vector2 pos) { m_transform.position = pos; }
 
 	Transform ConvertedToScreenSpace(Transform t);
 	Transform ConvertToUISpace(AnchorPosition aP, Transform t);
@@ -42,6 +43,8 @@ public:
 	Vector2 GetWindowNormalized() { return m_window_size / m_default_window_size; }
 
 	void InitializePlayerHUD(Player* player) { canvas.InitializePlayerHUD(player); }
+
+	void SetCanvasState(CurrentUI state) { canvas.ChangeState(state); }
 
 private:
 

@@ -8,8 +8,8 @@ UIElement::UIElement()
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }
 
-UIElement::UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text)
-	: m_anchor_point{ anchorPoint }, m_transform{ animDES }, m_src_one{ animOneSRC }, m_src_two{ animTwoSRC }, m_text{ text }
+UIElement::UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text, Vector2 text_scaling)
+	: m_anchor_point{ anchorPoint }, m_transform{ animDES }, m_src_one{ animOneSRC }, m_src_two{ animTwoSRC }, m_text{ text }, m_text_scaling{ text_scaling }
 {
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }
@@ -62,7 +62,7 @@ void UIElement::RenderText(SDL_Renderer* renderer, Camera camera, string text)
 
 		t = camera.ConvertToUISpace(m_anchor_point, t);
 
-		SDL_Rect fontRect = { t.position.x, t.position.y, 32 * camera.GetWindowNormalized().x, 32 * camera.GetWindowNormalized().y };
+		SDL_Rect fontRect = { t.position.x, t.position.y, 32 * camera.GetWindowNormalized().x * m_text_scaling.x, 32 * camera.GetWindowNormalized().y * m_text_scaling.y };
 
 		fontRect.x -= fontRect.w / 2;
 		fontRect.y -= fontRect.h / 2;

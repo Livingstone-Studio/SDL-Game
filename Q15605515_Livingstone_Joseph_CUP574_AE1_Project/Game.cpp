@@ -1,5 +1,13 @@
 #include "Game.h"
 
+#include "Camera.h"
+
+GameState Game::m_game_state = SMainMenu;
+
+bool Game::m_main_menu = true;
+
+bool Game::m_menu_first_frame = true;
+
 bool Game::m_run;
 bool Game::m_debug;
 
@@ -10,15 +18,45 @@ Game::Game()
 {
 }
 
-int Game::Execute()
+void Game::Execute() 
 {
     Setup();
 
-    GameLoop();
+    AppLoop();
 
     Close();
+}
 
-    return 0;
+void Game::GameExecute()
+{
+    for (int i = 0; i < m_gameobjects.size(); i++)
+    {
+        if (m_gameobjects[i] != nullptr)
+        {
+            m_gameobjects[i]->Delete();
+        }
+    }
+
+    m_gameobjects.clear();
+
+    GameSetup();
+
+    GameLoop();
+
+    GameClose();
+}
+
+void Game::Play()
+{ 
+    m_run = true;
+    m_game_state = Gameplay;
+}
+
+void Game::ReturnToMenu()
+{
+    m_run = false;
+    m_game_state = SMainMenu;
+    m_menu_first_frame = true;
 }
 
 void Game::Setup()
@@ -45,16 +83,99 @@ void Game::Setup()
         cout << "Failed to initialise SDL_TTF. Error: " << TTF_GetError() << endl;
     }
 
-    m_run = true;
-
-    Input::Initialize();
+    m_main_menu = true;
 
     m_window = SDL_CreateWindow( WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
     m_renderer = SDL_CreateRenderer(m_window, -1, 0);
 
+    Input::Initialize();
     AssetLoader::Initialize(m_renderer);
-
     AudioManager::Initialize();
+}
+
+void Game::AppLoop()
+{
+    while (m_main_menu)
+    {
+        switch (m_game_state)
+        {
+        case SMainMenu:
+
+            if (m_menu_first_frame) 
+            {
+                for (int i = 0; i < m_gameobjects.size(); i++)
+                {
+                    if (m_gameobjects[i] != nullptr)
+                    {
+                        m_gameobjects[i]->Delete();
+                    }
+                }
+
+                m_gameobjects.clear();
+
+                m_camera.SetCameraPosition({ 0,0 });
+                m_camera.SetCameraSize({ 0.5f,0.5f });
+
+                m_player_cast = nullptr;
+
+                vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/MainMenu.txt");
+
+                m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
+
+                m_menu_first_frame = false;
+            }
+
+            Input::Update();
+            Time::Update();
+
+            m_camera.SetCanvasState(MainMenu);
+
+            FrameInit();
+
+            for (int i = 0; i < m_gameobjects.size(); i++)
+            {
+                if (m_gameobjects[i] != nullptr)
+                {
+                    if (!m_gameobjects[i]->IsInitialized()) m_gameobjects[i]->Start();
+                }
+            }
+
+            m_camera.Start();
+
+            m_camera.RenderStart(m_renderer, m_gameobjects);
+
+            InputHandler();
+
+            int w, h;
+            SDL_GetWindowSize(m_window, &w, &h);
+            m_camera.Update({ (float)DEFAULT_WINDOW_WIDTH, (float)DEFAULT_WINDOW_HEIGHT }, { (float)w, (float)h });
+
+            for (int i = 0; i < m_gameobjects.size(); i++)
+            {
+                if (m_gameobjects[i] != nullptr)
+                {
+                    m_gameobjects[i]->Update(Time::GetDeltaTime());
+                }
+            }
+
+            RendererHandler();
+
+            FrameCleanup();
+
+            break;
+
+        case Gameplay:
+
+            GameExecute();
+
+            break;
+        }
+    }
+}
+
+void Game::GameSetup()
+{
+    m_run = true;
 
     m_gameobjects.push_back(new Player({ 0, 0, 5, 5 }));
     
@@ -72,6 +193,8 @@ void Game::Setup()
     m_gameobjects.push_back(new Collectable({ 9, 1, 1, 1 }, Potato));
 
     m_camera.InitializePlayerHUD(m_player_cast);
+
+    m_camera.SetCanvasState(HUD);
 }
 
 void Game::FrameInit()
@@ -136,8 +259,11 @@ void Game::FrameCleanup()
 
 void Game::InputHandler()
 {
-    m_run = Input::EventHandler();
-    
+    bool game_state = Input::EventHandler();
+
+    m_main_menu = game_state;
+    m_run = game_state;
+
     if (Input::GetKeyDown(SDL_SCANCODE_F11) && !m_fullscreen)
     {
         SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
@@ -153,7 +279,6 @@ void Game::InputHandler()
     {
         m_player_cast->ToggleNoClip();
     }
-
 
     if (Input::GetKeyDown(SDL_SCANCODE_I) && m_debug)
     {
@@ -216,6 +341,20 @@ void Game::RendererHandler()
     SDL_RenderPresent(m_renderer);
 }
 
+void Game::GameClose()
+{
+    for (int i = 0; i < m_gameobjects.size(); i++)
+    {
+        if (m_gameobjects[i] != nullptr)
+        {
+            delete m_gameobjects[i];
+            m_gameobjects[i] = nullptr;
+        }
+    }
+
+    m_gameobjects.clear();
+}
+
 void Game::Close()
 {
     Input::Cleanup();
@@ -273,3 +412,4 @@ void Game::KillEnemy()
 
     if (cast != nullptr && m_gameobjects.size() - 1 != 0) cast->Delete();
 }
+

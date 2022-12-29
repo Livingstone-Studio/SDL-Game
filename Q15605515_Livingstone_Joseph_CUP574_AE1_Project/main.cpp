@@ -4,5 +4,7 @@ int main(int argc, char* argv[])
 {
 	Game game;
 
-	return game.Execute();
+	game.Execute();
+
+	return 0;
 }

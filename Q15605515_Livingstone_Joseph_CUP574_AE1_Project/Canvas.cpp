@@ -7,6 +7,12 @@
 
 Canvas::Canvas()
 {
+	// Main Menu
+
+	m_main_menu_elements.push_back(new UIElement(TopLeft, { 0, .6f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "Gobbie The Gobbo", { 8,2 }));
+	
+	m_main_menu_elements.push_back(new PlayButton(TopLeft, { 0, -.6f, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
+
 	// HUD
 
 	// Health GFX
@@ -105,6 +111,17 @@ Canvas::~Canvas()
 
 void Canvas::Start()
 {
+	for (int i = 0; i < m_main_menu_elements.size(); i++)
+	{
+		if (m_main_menu_elements[i] != nullptr)
+		{
+			if (!m_main_menu_elements[i]->IsInitialized())
+			{
+				m_main_menu_elements[i]->Start();
+			}
+		}
+	}
+
 	for (int i = 0; i < m_hud_elements.size(); i++)
 	{
 		if (m_hud_elements[i] != nullptr)
@@ -148,6 +165,17 @@ void Canvas::Start()
 
 void Canvas::RenderStart(SDL_Renderer* renderer)
 {
+	for (int i = 0; i < m_main_menu_elements.size(); i++)
+	{
+		if (m_main_menu_elements[i] != nullptr)
+		{
+			if (!m_main_menu_elements[i]->IsRenderInitialized())
+			{
+				m_main_menu_elements[i]->RenderStart(renderer);
+			}
+		}
+	}
+
 	for (int i = 0; i < m_hud_elements.size(); i++)
 	{
 		if (m_hud_elements[i] != nullptr)
@@ -195,6 +223,15 @@ void Canvas::Update(Camera camera)
 
 	switch (m_current_ui) 
 	{
+	case MainMenu:
+		for (int i = 0; i < m_main_menu_elements.size(); i++)
+		{
+			if (m_main_menu_elements[i] != nullptr)
+			{
+				m_main_menu_elements[i]->Update(camera);
+			}
+		}
+		break;
 	case HUD:
 		for (int i = 0; i < m_hud_elements.size(); i++)
 		{
@@ -287,6 +324,15 @@ void Canvas::RenderUpdate(SDL_Renderer* renderer, Camera camera)
 
 	switch (m_current_ui)
 	{
+	case MainMenu:
+		for (int i = 0; i < m_main_menu_elements.size(); i++)
+		{
+			if (m_main_menu_elements[i] != nullptr)
+			{
+				m_main_menu_elements[i]->RenderUpdate(renderer, camera);
+			}
+		}
+		break;
 	case HUD:
 		for (int i = 0; i < m_hud_elements.size(); i++)
 		{
@@ -323,7 +369,6 @@ void Canvas::RenderUpdate(SDL_Renderer* renderer, Camera camera)
 			if (m_debug_elements[i] != nullptr)
 			{
 				m_debug_elements[i]->RenderUpdate(renderer, camera);
-
 			}
 		}
 	}
