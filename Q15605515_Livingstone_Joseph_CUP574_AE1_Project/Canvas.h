@@ -6,19 +6,22 @@
 #include "UIElement.h"
 #include "Button.h"
 #include "MuteButton.h"
-#include "SaveButton.h"
+#include "MuteEffectButton.h"
 #include "SettingsButton.h"
 #include "SystemSettings.h"
 #include "DebugButton.h"
 #include "ReturnToMenuButton.h"
 #include "PlayButton.h"
+#include "QuitButton.h"
+#include "HowToPlayButton.h"
+#include "LevelSelectButton.h"
 #include "Slider.h"
 
 class Player;
 class Camera;
 
 enum CurrentUI {
-	MainMenu, HUD, InGameMenu, SystemMenu
+	MainMenu, LevelSelect, HowToPlay, HUD, InGameMenu, SystemMenu, VictoryScreen, DeathScreen
 };
 
 class Canvas
@@ -40,6 +43,7 @@ public:
 	void InitializePlayerHUD(Player* player);
 
 	void ChangeState(CurrentUI state) { m_current_ui = state; }
+	CurrentUI GetState() { return m_current_ui; }
 
 private:
 
@@ -47,13 +51,24 @@ private:
 	
 	vector<UIElement*> m_main_menu_elements;
 
+	vector<UIElement*> m_level_select_elements;
+
+	vector<UIElement*> m_controls_menu_elements;
+
 	vector<UIElement*> m_hud_elements;
 
 	vector<UIElement*> m_in_game_menu_elements;
 
 	vector<Slider*> m_sliders;
 
+	UIElement* m_score_ui{ nullptr };
+
+	vector<UIElement*> m_high_score_elements;
+
 	vector<UIElement*> m_syspanel_elements;
+
+	vector<UIElement*> m_victory_elements;
+	vector<UIElement*> m_death_elements;
 
 	vector<UIElement*> m_debug_elements;
 };

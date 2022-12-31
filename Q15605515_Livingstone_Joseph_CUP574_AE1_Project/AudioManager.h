@@ -17,13 +17,17 @@ public:
 
 	static void PlayEffect(string name);
 
-	static void ToggleSound();
+	static void ToggleEffects();
+
+	static void ToggleMusic();
 
 private:
 
 	// Audio
 
-	static bool m_active;
+	static bool m_effects_active;
+
+	static bool m_music_active;
 
 	static Mix_Music* m_music;
 

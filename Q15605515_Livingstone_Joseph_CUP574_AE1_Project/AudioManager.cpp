@@ -1,6 +1,8 @@
 #include "AudioManager.h"
 
-bool AudioManager::m_active{ true };
+bool AudioManager::m_effects_active{ true };
+
+bool AudioManager::m_music_active{ true };
 
 Mix_Music* AudioManager::m_music{ nullptr };
 
@@ -73,7 +75,7 @@ void AudioManager::Cleanup()
 
 void AudioManager::PlayEffect(string name)
 {
-	if (!m_active) return;
+	if (!m_effects_active) return;
 
 	Mix_Chunk* track = nullptr;
 
@@ -106,10 +108,15 @@ void AudioManager::PlayEffect(string name)
 	else cout << "Can't find sound effect." << endl;
 }
 
-void AudioManager::ToggleSound()
+void AudioManager::ToggleEffects()
 {
-	m_active = !m_active;
+	m_effects_active = !m_effects_active;
+}
 
-	if (m_active) Mix_VolumeMusic(32);
+void AudioManager::ToggleMusic()
+{
+	m_music_active = !m_music_active;
+
+	if (m_music_active) Mix_VolumeMusic(32);
 	else Mix_VolumeMusic(0);
 }

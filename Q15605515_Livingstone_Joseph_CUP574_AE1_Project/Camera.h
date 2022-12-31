@@ -45,6 +45,7 @@ public:
 	void InitializePlayerHUD(Player* player) { canvas.InitializePlayerHUD(player); }
 
 	void SetCanvasState(CurrentUI state) { canvas.ChangeState(state); }
+	CurrentUI GetCanvasState() { return canvas.GetState(); }
 
 private:
 

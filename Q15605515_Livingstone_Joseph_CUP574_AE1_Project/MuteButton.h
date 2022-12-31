@@ -2,12 +2,12 @@
 
 #include "Button.h"
 
-class MuteButton : public Button
+class MuteMusicButton : public Button
 {
 public:
 
-	MuteButton();
-	MuteButton(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC);
+	MuteMusicButton();
+	MuteMusicButton(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC);
 
 	virtual void PressButton() override;
 };

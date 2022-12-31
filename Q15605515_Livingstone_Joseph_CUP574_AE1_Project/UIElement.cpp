@@ -8,10 +8,12 @@ UIElement::UIElement()
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
 }
 
-UIElement::UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text, Vector2 text_scaling)
+UIElement::UIElement(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC, string text, Vector2 text_scaling, Vector2 text_offset)
 	: m_anchor_point{ anchorPoint }, m_transform{ animDES }, m_src_one{ animOneSRC }, m_src_two{ animTwoSRC }, m_text{ text }, m_text_scaling{ text_scaling }
 {
 	m_gfx.UpdateSRC(m_src_one, m_src_two);
+
+	m_text_offset = text_offset;
 }
 
 UIElement::~UIElement()

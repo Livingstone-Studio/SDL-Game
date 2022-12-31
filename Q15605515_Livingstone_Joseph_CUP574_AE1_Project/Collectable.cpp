@@ -3,34 +3,24 @@
 #include "Player.h"
 
 Collectable::Collectable()
-	: Collectable({ 0,0,1,1 }, Potato)
+	: Collectable({ 0,0,1,1 })
 {
 	m_collider_scale = { .25f,.25f };
 	m_image_name = "Collectables";
+
+	if (m_key) m_sprite_info = m_gfx_info;
 }
 
-Collectable::Collectable(Transform transform, CollectableType collectable_type)
+Collectable::Collectable(Transform transform, bool isKey)
 {
 	m_transform = transform;
 	m_collider.SetTrigger(true);
 	m_collider_scale = { .25f,.25f };
 	m_image_name = "Collectables";
 
-	switch (collectable_type) 
-	{
-	case PotatoSeeds:
-		m_sprite_info = m_potato_seeds_info;
-		break;
-	case Potato:
-		m_sprite_info = m_potato_info;
-		break;
-	case CauliSeeds:
-		m_sprite_info = m_cauli_seeds_info;
-		break;
-	case Cauli:
-		m_sprite_info = m_cauli_info;
-		break;
-	}
+	m_key = isKey;
+
+	if (m_key) m_sprite_info = m_gfx_info;
 }
 
 Collectable::~Collectable()
@@ -54,7 +44,6 @@ void Collectable::RenderStart(SDL_Renderer* renderer, Camera camera)
 	GameObject::RenderStart(renderer, camera);
 }
 
-
 void Collectable::CollisionResponse()
 {
 	for (int i = 0; i < m_frame_collided.size(); i++)
@@ -63,7 +52,7 @@ void Collectable::CollisionResponse()
 
 		if (player != nullptr)
 		{
-			if (player->AddToInventory(*this))
+			if (player->AddCollectable(*this))
 			{
 				AudioManager::PlayEffect("collectable");
 				Delete();

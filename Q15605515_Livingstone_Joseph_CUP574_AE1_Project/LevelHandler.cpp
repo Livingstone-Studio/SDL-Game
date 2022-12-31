@@ -10,6 +10,8 @@ TileInfo LevelHandler::m_player_gfx{ "grass", -5, { "player", {0,1,0.0f,24,false
 TileInfo LevelHandler::m_plainsTile{ "grass", -10, { "plains", {0,1,0.0f,0,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
 TileInfo LevelHandler::m_grassTile{ "grass", -10, { "grass", {0,1,0.0f,1,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
 
+TileInfo LevelHandler::m_finish_tile = { "grass", -5, { "grow", {0,1,0.0f,5,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false };
+
 TileInfo LevelHandler::m_pathTiles[4] = {
     { "grass", -10, { "path", {1,1,0.0f,0,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false },
     { "grass", -10, { "path", {1,1,0.0f,1,false} , {-5,0,0.0f,0,false}, { 0,0 } }, false },
@@ -32,6 +34,11 @@ TileInfo LevelHandler::m_riverTiles[3] = {
     { "grass", -10, { "river", {6,4,5.0f,0,true} , {-5,0,0.0f,0,false}, { 0,0 } }, false },
     { "grass", -10, { "river", {7,4,5.0f,0,true} , {-5,0,0.0f,0,false}, { 0,0 } }, false }
 };
+
+Orc LevelHandler::m_orc;
+Slime LevelHandler::m_slime;
+
+Collectable LevelHandler::m_collectable;
 
 vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
 {
@@ -67,7 +74,12 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
                     new Prop( transform , m_grassTile));
                 break;
 
-
+            case '0':
+                t.push_back(
+                    new Prop(transform, m_plainsTile));
+                t.push_back(
+                    new Prop(transform, m_finish_tile, true, m_tile_collider_scaling, true));
+                break;
 
             case 'I':
                 t.push_back(
@@ -148,6 +160,20 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
                 t.push_back(new Prop(
                     transform, m_player_gfx));
                 break;
+
+            case '1':
+                t.push_back(
+                    new Prop(transform, m_plainsTile));
+                t.push_back(
+                    new Orc({ transform.position , { 5, 5 } }));
+                break;
+            case '2':
+                t.push_back(
+                    new Prop(transform, m_plainsTile));
+                t.push_back(
+                    new Slime({ transform.position , { 5, 5 } } ));
+                break;
+
             default:
                 break;
             }

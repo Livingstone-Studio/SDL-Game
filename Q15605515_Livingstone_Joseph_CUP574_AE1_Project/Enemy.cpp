@@ -24,14 +24,15 @@ void Enemy::Update(float deltaTime)
 
 	if (m_target != nullptr) 
 	{
-		moveVector = m_target->GetTransform().position - m_transform.position;
-
-		if (m_target->IsDead()) 
+		if (InRange()) 
 		{
-			m_target = nullptr;
+			moveVector = m_target->GetTransform().position - m_transform.position;
+
+			if (m_target->IsDead())
+			{
+				m_target = nullptr;
+			}
 		}
-	}
-	else {
 	}
 
 	SetMovementDirection(moveVector);
@@ -149,23 +150,12 @@ void Enemy::CollisionResponse()
 	{
 		if (!m_frame_collided[i].info.trigger)
 		{
-			//cout << "H: " << m_frame_collided[i].info.hor << ",V: " << m_frame_collided[i].info.vert << endl;
-
 			Character* character = dynamic_cast<Character*>(m_frame_collided[i].gameObject);
 
 			if (character == nullptr) 
 			{
 				m_attempted_frame_movement = { 0,0 };
 			}
-
-			//Vector2 pos1 = m_frame_collided[i].info.c1_transform.position;
-			//Vector2 pos2 = m_frame_collided[i].info.c2_transform.position;
-
-			//Vector2 dir = pos2 - pos1;
-
-			//if (dir.x > 0 || dir.x < 0) moveDir.x = 0;
-			//if (dir.y > 0 || dir.y < 0) moveDir.y = 0;
-
 		}
 		else
 		{
@@ -185,4 +175,21 @@ void Enemy::CollisionResponse()
 			}
 		}
 	}
+}
+
+bool Enemy::InRange()
+{
+	Vector2 targetpos = m_target->GetTransform().position;
+
+	if (!m_chasing)
+	{
+		m_chasing = ((targetpos - m_transform.position).Magnitude() < 6);
+	}
+
+	if (m_chasing) 
+	{
+		return true;
+	}
+
+	return false;
 }

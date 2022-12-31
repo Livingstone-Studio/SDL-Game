@@ -11,6 +11,8 @@ bool Game::m_menu_first_frame = true;
 bool Game::m_run;
 bool Game::m_debug;
 
+Camera Game::m_camera;
+
 SDL_Window* Game::m_window;
 SDL_Renderer* Game::m_renderer;
 
@@ -29,15 +31,6 @@ void Game::Execute()
 
 void Game::GameExecute()
 {
-    for (int i = 0; i < m_gameobjects.size(); i++)
-    {
-        if (m_gameobjects[i] != nullptr)
-        {
-            m_gameobjects[i]->Delete();
-        }
-    }
-
-    m_gameobjects.clear();
 
     GameSetup();
 
@@ -91,6 +84,7 @@ void Game::Setup()
     Input::Initialize();
     AssetLoader::Initialize(m_renderer);
     AudioManager::Initialize();
+    ScoreManager::Initialize();
 }
 
 void Game::AppLoop()
@@ -128,7 +122,7 @@ void Game::AppLoop()
             Input::Update();
             Time::Update();
 
-            m_camera.SetCanvasState(MainMenu);
+            if (m_camera.GetCanvasState() != HowToPlay && m_camera.GetCanvasState() != LevelSelect) m_camera.SetCanvasState(MainMenu);
 
             FrameInit();
 
@@ -175,6 +169,16 @@ void Game::AppLoop()
 
 void Game::GameSetup()
 {
+    for (int i = 0; i < m_gameobjects.size(); i++)
+    {
+        if (m_gameobjects[i] != nullptr)
+        {
+            m_gameobjects[i]->Delete();
+        }
+    }
+
+    m_gameobjects.clear();
+
     m_run = true;
 
     m_gameobjects.push_back(new Player({ 0, 0, 5, 5 }));
@@ -185,14 +189,27 @@ void Game::GameSetup()
 
     m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
 
-    m_gameobjects.push_back(new Collectable({ 7, 0, 1, 1 }, Potato));
-    m_gameobjects.push_back(new Collectable({ 7, 1, 1, 1 }, PotatoSeeds));
-    m_gameobjects.push_back(new Collectable({ 8, 0, 1, 1 }, Cauli));
-    m_gameobjects.push_back(new Collectable({ 8, 1, 1, 1 }, PotatoSeeds));
-    m_gameobjects.push_back(new Collectable({ 9, 0, 1, 1 }, CauliSeeds));
-    m_gameobjects.push_back(new Collectable({ 9, 1, 1, 1 }, Potato));
+    for (int i = 0; i < m_gameobjects.size(); i++) 
+    {
+        Orc* orccast = dynamic_cast<Orc*>(m_gameobjects[i]);
+
+        if (orccast != nullptr) orccast->SetTarget(m_player_cast);
+
+        Slime* slimecast = dynamic_cast<Slime*>(m_gameobjects[i]);
+
+        if (slimecast != nullptr) slimecast->SetTarget(m_player_cast);
+    }
+
+    m_gameobjects.push_back(new Collectable({ 7, 0, 1, 1 }));
+    m_gameobjects.push_back(new Collectable({ 7, 1, 1, 1 }));
+    m_gameobjects.push_back(new Collectable({ 8, 0, 1, 1 }, true));
+    m_gameobjects.push_back(new Collectable({ 8, 1, 1, 1 }));
+    m_gameobjects.push_back(new Collectable({ 9, 0, 1, 1 }));
+    m_gameobjects.push_back(new Collectable({ 9, 1, 1, 1 }));
 
     m_camera.InitializePlayerHUD(m_player_cast);
+
+    ScoreManager::InitLevel();
 
     m_camera.SetCanvasState(HUD);
 }
@@ -360,6 +377,7 @@ void Game::Close()
     Input::Cleanup();
     AssetLoader::Cleanup();
     AudioManager::Cleanup();
+    ScoreManager::Cleanup();
 
     for (int i = 0; i < m_gameobjects.size(); i++)
     {

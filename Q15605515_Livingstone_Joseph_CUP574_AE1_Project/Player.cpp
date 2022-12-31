@@ -1,6 +1,8 @@
 #include "Player.h"
 
 #include "Collectable.h"
+#include "ScoreManager.h"
+#include "Game.h"
 
 Player::Player()
 {
@@ -24,12 +26,12 @@ Player::~Player()
 {
 }
 
-void Player::InitializeHUD(vector<Slider*> elements)
+void Player::InitializeHUD(vector<Slider*> elements, UIElement* score)
 {
 	m_health_bar = elements[0];
 	m_energy_bar = elements[1];
-	m_thirst_bar = elements[2];
-	m_hunger_bar = elements[3];
+
+	m_score_ui = score;
 }
 
 void Player::RenderStart(SDL_Renderer* renderer, Camera camera)
@@ -84,39 +86,20 @@ void Player::Update(float deltaTime)
 		m_move_speed = m_default_move_speed;
 	}
 
-	if (!Input::GetKey(SDL_SCANCODE_LSHIFT) && m_energy < m_max_energy && (m_hungry > 0 || m_thirst > 0))
+	if (!Input::GetKey(SDL_SCANCODE_LSHIFT) && m_energy < m_max_energy)
 	{
 		float regenAmount = deltaTime * m_energy_regen_multiplier;
-
-		if (m_hungry > 0) 
-		{
-			regenAmount *= m_hungry_usage_multiplier;
-			m_hungry -= deltaTime * m_hungry_usage_multiplier;
-		}
-		if (m_thirst > 0) 
-		{
-			regenAmount *= m_thirst_usage_multiplier;
-			m_thirst -= deltaTime * m_thirst_usage_multiplier;
-		}
-
-		if (m_hungry < 0) m_hungry = 0;
-		if (m_thirst < 0) m_thirst = 0;
 
 		m_energy += regenAmount;
 
 		if (m_energy > m_max_energy) m_energy = m_max_energy;
 
-
-		if (m_hunger_bar != nullptr) m_hunger_bar->SetSize(m_hungry / m_max_hungry);
-		else cout << "No bar" << endl;
-
-		if (m_thirst_bar != nullptr) m_thirst_bar->SetSize(m_thirst / m_max_thirst);
-		else cout << "No bar" << endl;
 	}
-
 
 	if (m_energy_bar != nullptr) m_energy_bar->SetSize(m_energy / m_max_energy);
 	else cout << "No bar" << endl;
+
+	if (m_score_ui != nullptr) m_score_ui->SetText(to_string(ScoreManager::GetScore()));
 
 	Character::Update(deltaTime);
 }
@@ -237,29 +220,11 @@ void Player::ToggleNoClip()
 	m_collider.SetActive(!m_collider.GetActive());
 }
 
-void Player::Eat(float amount)
+bool Player::AddCollectable(Collectable c)
 {
-	m_hungry += amount;
+	if (!c.IsKey()) ScoreManager::AddScore(c.GetScore());
+	else ScoreManager::ActivateKey();
 
-	if (m_hungry > m_max_hungry) m_hungry = m_max_hungry;
-
-	if (m_hunger_bar != nullptr) m_hunger_bar->SetSize(m_hungry/m_max_hungry);
-	else cout << "No bar" << endl;
-}
-
-void Player::Drink(float amount)
-{
-	m_thirst += amount;
-
-	if (m_thirst > m_max_thirst) m_thirst = m_max_thirst;
-
-	if (m_thirst_bar != nullptr) m_thirst_bar->SetSize(m_thirst / m_max_thirst);
-	else cout << "No bar" << endl;
-}
-
-bool Player::AddToInventory(Collectable c)
-{
-	cout << "Added collectable to inventory" << endl;
 	return true;
 }
 
@@ -269,4 +234,6 @@ void Player::TakeDamage(int health)
 
 	if (m_health_bar != nullptr) m_health_bar->SetSize((float)m_health / (float)m_max_health);
 	else cout << "No bar" << endl;
+
+	if (m_health <= 0) Game::ChangeCanvasState(DeathScreen);
 }

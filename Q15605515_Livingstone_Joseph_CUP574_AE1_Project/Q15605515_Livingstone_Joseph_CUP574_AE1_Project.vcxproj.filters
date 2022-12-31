@@ -117,7 +117,7 @@
     <ClCompile Include="Collectable.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="SaveButton.cpp">
+    <ClCompile Include="MuteEffectButton.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="MuteButton.cpp">
@@ -140,6 +140,18 @@
     </ClCompile>
     <ClCompile Include="PlayButton.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HowToPlayButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +224,7 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SaveButton.h">
+    <ClInclude Include="MuteEffectButton.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="MuteButton.h">
@@ -238,6 +250,18 @@
     </ClInclude>
     <ClInclude Include="PlayButton.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HowToPlayButton.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitButton.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectButton.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

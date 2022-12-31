@@ -2,17 +2,17 @@
 
 #include "AudioManager.h"
 
-MuteButton::MuteButton()
+MuteMusicButton::MuteMusicButton()
 	:Button()
 {
 }
 
-MuteButton::MuteButton(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC)
+MuteMusicButton::MuteMusicButton(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC)
 	: Button(anchorPoint, animDES, animOneSRC, animTwoSRC)
 {
 }
 
-void MuteButton::PressButton()
+void MuteMusicButton::PressButton()
 {
-	AudioManager::ToggleSound();
+	AudioManager::ToggleMusic();
 }

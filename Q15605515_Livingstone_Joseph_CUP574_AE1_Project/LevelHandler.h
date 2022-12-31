@@ -4,6 +4,11 @@
 #include "AssetLoader.h"
 #include "Prop.h"
 
+#include "Orc.h"
+#include "Slime.h"
+
+#include "Collectable.h"
+
 #include <string>
 #include <vector>
 #include <fstream>
@@ -39,4 +44,10 @@ private:
 
 	static TileInfo m_pathTiles[4];
 
+	static TileInfo m_finish_tile;
+
+	static Orc m_orc;
+	static Slime m_slime;
+
+	static Collectable m_collectable;
 };

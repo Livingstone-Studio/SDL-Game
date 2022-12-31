@@ -21,7 +21,11 @@ public:
 	virtual void CollisionCheck(vector<GameObject*> gameObjects) override;
 	virtual void CollisionResponse() override;
 
+	virtual bool InRange();
+
 protected:
+
+	bool m_chasing{ false };
 
 	string m_image_name{ "Orc" };
 

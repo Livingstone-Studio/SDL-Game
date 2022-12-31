@@ -22,6 +22,7 @@
 #include "Slime.h"
 #include "Collectable.h"
 #include "AudioManager.h"
+#include "ScoreManager.h"
 
 #include <vector>
 
@@ -53,11 +54,14 @@ public:
 	static void ToggleDebug() {	m_debug = !m_debug;	}
 
 	static void Play();
+
 	static void ReturnToMenu();
 
 	static void Quit() { m_main_menu = false; }
 
 	static bool DebugMode() { return m_debug; }
+
+	static void ChangeCanvasState(CurrentUI state) { m_camera.SetCanvasState(state); }
 
 private:
 
@@ -75,7 +79,7 @@ private:
 
 	bool m_fullscreen{ false };
 
-	Camera m_camera;
+	static Camera m_camera;
 
 
 	Player* m_player_cast;

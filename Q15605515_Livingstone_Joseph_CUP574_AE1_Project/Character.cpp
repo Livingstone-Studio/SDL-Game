@@ -180,14 +180,6 @@ void Character::CollisionResponse()
 				m_attempted_frame_movement = { 0,0 };
 			}
 
-			//Vector2 pos1 = m_frame_collided[i].info.c1_transform.position;
-			//Vector2 pos2 = m_frame_collided[i].info.c2_transform.position;
-
-			//Vector2 dir = pos2 - pos1;
-
-			//if (dir.x > 0 || dir.x < 0) moveDir.x = 0;
-			//if (dir.y > 0 || dir.y < 0) moveDir.y = 0;
-
 		}
 		else 
 		{

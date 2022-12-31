@@ -40,11 +40,14 @@ void Slime::Update(float deltaTime)
 
 	if (m_target != nullptr)
 	{
-		moveVector = m_target->GetTransform().position - m_transform.position;
-
-		if (m_target->IsDead())
+		if (InRange())
 		{
-			m_target = nullptr;
+			moveVector = m_target->GetTransform().position - m_transform.position;
+
+			if (m_target->IsDead())
+			{
+				m_target = nullptr;
+			}
 		}
 	}
 
