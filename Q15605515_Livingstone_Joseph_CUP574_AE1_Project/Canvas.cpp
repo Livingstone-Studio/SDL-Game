@@ -35,6 +35,7 @@ Canvas::Canvas()
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { -.5f, 0, 5.0f, 5.0f }, { 81, 208, 23, 18 }, { 0, 0, 0, 0 }, "Move", { 6,2 }, { 0,-.5f }));
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { .5f, 0, 4.0f, 4.0f }, { 113, 227, 7, 10 }, { 0, 0, 0, 0 }, "Attack", { 6,2 }, { 0,-.5f }));
 
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, .5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Your goal is to help Gobbie plant his crops! Find the seeds and plant them on tilled dirt!", { 23,1 }));
 
 	// HUD
 
@@ -74,14 +75,13 @@ Canvas::Canvas()
 	m_in_game_menu_elements.push_back(new MuteEffectButton(TopLeft, { -.7f, .8f, 2.75f, 2.75f }, { 64, 256, 16, 16 }, { 0, 0, 0, 0 }));
 	m_in_game_menu_elements.push_back(new SystemSettings(TopLeft, { -.55f, .8f, 2.75f, 2.75f }, { 0, 224, 16, 16 }, { 0, 0, 0, 0 }));
 
-
 	// System panel
 
 	m_syspanel_elements.push_back(new UIElement(TopRight, { 0, .8f, 4.5f, 4.5f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }));
 
 	// System Options
 	m_syspanel_elements.push_back(new DebugButton(TopLeft, { -0.075f, .8f, 2.75f, 2.75f }, { 0, 272, 16, 16 }, { 0, 0, 0, 0 }));
-	m_syspanel_elements.push_back(new ReturnToMenuButton(TopLeft, { 0.075f, .8f, 2.75f, 2.75f }, { 0, 304, 16, 16 }, { 0, 0, 0, 0 }));
+	m_syspanel_elements.push_back(new ReturnToMenuButton(TopLeft, { 0.075f, .8f, 2.75f, 2.75f }, { 0, 304, 16, 16 }, { 0, 0, 0, 0 }, "", true));
 
 	// Victory Screen
 

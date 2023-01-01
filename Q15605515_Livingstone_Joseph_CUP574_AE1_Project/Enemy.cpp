@@ -153,8 +153,9 @@ void Enemy::CollisionResponse()
 		if (!m_frame_collided[i].info.trigger)
 		{
 			Character* character = dynamic_cast<Character*>(m_frame_collided[i].gameObject);
+			Collectable* collectable = dynamic_cast<Collectable*>(m_frame_collided[i].gameObject);
 
-			if (character == nullptr) 
+			if (character == nullptr && collectable == nullptr) 
 			{
 				m_attempted_frame_movement = { 0,0 };
 			}

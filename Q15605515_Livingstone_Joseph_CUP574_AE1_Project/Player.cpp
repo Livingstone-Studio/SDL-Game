@@ -104,6 +104,8 @@ void Player::Update(float deltaTime)
 
 	if (m_score_ui != nullptr) m_score_ui->SetText(to_string(ScoreManager::GetScore()));
 
+	if (Game::GetCanvasState() == VictoryScreen) m_attempted_frame_movement = { 0,0 };
+
 	Character::Update(deltaTime);
 }
 

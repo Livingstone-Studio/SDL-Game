@@ -80,7 +80,7 @@ bool Button::CheckMouseOnButton(Camera camera)
 	Transform t = m_transform;
 	t = t.position + m_offset;
 
-	t.scale *= m_scale;
+	t.scale *= m_default_scale;
 	t.scale *= m_transform.scale;
 
 	Vector2 scale = { 5,2 };

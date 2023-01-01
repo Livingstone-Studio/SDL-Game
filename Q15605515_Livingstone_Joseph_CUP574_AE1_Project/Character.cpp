@@ -1,5 +1,7 @@
 #include "Character.h"
 
+#include "Game.h"
+
 Character::Character()
 	: m_attack_collider(false, true, { 0.3f,0.1f })
 {

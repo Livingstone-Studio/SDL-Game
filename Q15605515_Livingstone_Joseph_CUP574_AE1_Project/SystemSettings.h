@@ -9,6 +9,8 @@ public:
 	SystemSettings();
 	SystemSettings(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC);
 
+	virtual bool CheckMouseOnButton(Camera camera);
+
 	virtual void PressButton() override;
 };
 
