@@ -14,6 +14,8 @@ public:
 
 	virtual void Update(float deltaTime) override;
 
+	virtual void RenderUpdate(SDL_Renderer* renderer, Camera camera);
+
 	virtual void CollisionResponse() override;
 
 	virtual void RenderStart(SDL_Renderer* renderer, Camera camera) override;
@@ -26,5 +28,9 @@ protected:
 
 	AnimationInfo m_sprite_info{ "grass", {0, 0, 0.0f, 0, false}, {0, 0, 0.0f, 0, false}, { 0, 0 } };
 
+	AnimationInfo m_crop_info{ "grass", {0,1,0.0f,6,false} , {0,0,0.0f,-5,false}, { 0,0.5f } };
+	
+	Vector2 m_crop_scaling = { 4,4 };
+	
 };
 

@@ -50,6 +50,18 @@ void Prop::Update(float deltaTime)
 	GameObject::Update(deltaTime);
 }
 
+void Prop::RenderUpdate(SDL_Renderer* renderer, Camera camera)
+{
+	if (Game::GetCanvasState() == VictoryScreen && m_end_tile)
+	{
+		m_transform.scale = m_crop_scaling;
+
+		m_gfx.ChangeAnimation(renderer, m_crop_info);
+	}
+
+	GameObject::RenderUpdate(renderer, camera);
+}
+
 void Prop::CollisionResponse()
 { 
 	if (m_end_tile) 
