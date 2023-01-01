@@ -47,8 +47,9 @@ void Game::Play()
 
 void Game::ReturnToMenu()
 {
-    m_run = false;
     m_game_state = SMainMenu;
+    m_run = false;
+    m_debug = false;
     m_menu_first_frame = true;
 }
 
@@ -295,22 +296,23 @@ void Game::InputHandler()
         m_fullscreen = false;
     }
 
+
+    if (Input::GetKeyDown(SDL_SCANCODE_1))
+    {
+        m_camera.SetScale(.5f);
+    }
+    else if (Input::GetKeyDown(SDL_SCANCODE_2))
+    {
+        m_camera.SetScale(1);
+    }
+    else if (Input::GetKeyDown(SDL_SCANCODE_3))
+    {
+        m_camera.SetScale(1.5f);
+    }
+
     if (Input::GetKeyDown(SDL_SCANCODE_N) && m_debug && m_player_cast != nullptr)
     {
         m_player_cast->ToggleNoClip();
-    }
-
-    if (Input::GetKeyDown(SDL_SCANCODE_I) && m_debug)
-    {
-        SpawnOrc();
-    }
-    else if (Input::GetKeyDown(SDL_SCANCODE_O) && m_debug)
-    {
-        SpawnSlime();
-    }
-    else if (Input::GetKeyDown(SDL_SCANCODE_P) && m_debug)
-    {
-        KillEnemy();
     }
 
     if (m_player_cast != nullptr)
@@ -407,30 +409,5 @@ void Game::Close()
 
     SDL_Quit();
 
-}
-
-// DEBUG
-
-void Game::SpawnOrc()
-{
-    m_gameobjects.push_back(new Orc({ 0, 0, 5, 5 }));
-    Orc* cast = dynamic_cast<Orc*>(m_gameobjects[m_gameobjects.size() - 1]);
-
-    if (cast != nullptr) cast->SetTarget(m_player_cast);
-}
-
-void Game::SpawnSlime()
-{
-    m_gameobjects.push_back(new Slime({ 0, 0, 5, 5 }));
-    Slime* cast = dynamic_cast<Slime*>(m_gameobjects[m_gameobjects.size()-1]);
-
-    if (cast != nullptr) cast->SetTarget(m_player_cast);
-}
-
-void Game::KillEnemy()
-{
-    Enemy* cast = dynamic_cast<Enemy*>(m_gameobjects[m_gameobjects.size()-1]);
-
-    if (cast != nullptr && m_gameobjects.size() - 1 != 0) cast->Delete();
 }
 

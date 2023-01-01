@@ -86,7 +86,7 @@ private:
 	Player* m_player_cast;
 	vector<GameObject*> m_gameobjects;
 
-	const char* WINDOW_NAME = "Gobbie the Gobbo Farmer";
+	const char* WINDOW_NAME = "Gobbie the Gobbo";
 	 int DEFAULT_WINDOW_WIDTH = 960;
 	const int DEFAULT_WINDOW_HEIGHT = 590;
 
@@ -112,8 +112,4 @@ private:
 
 	void Close();
 
-	// DEBUG
-	void SpawnOrc();
-	void SpawnSlime();
-	void KillEnemy();
 };

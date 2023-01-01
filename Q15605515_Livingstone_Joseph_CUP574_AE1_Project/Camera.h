@@ -47,13 +47,14 @@ public:
 	void SetCanvasState(CurrentUI state) { canvas.ChangeState(state); }
 	CurrentUI GetCanvasState() { return canvas.GetState(); }
 
+	void SetScale(float s) { m_scale = s; }
+
 private:
 
 	Canvas canvas;
 
 	vector<GameObject*> SortRenderOrder(vector<GameObject*> gameObjects);
 
-	void SetScale(float s) { m_scale = s; }
 	
 	void SetClampedSpeed(float s);
 

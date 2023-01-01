@@ -59,88 +59,93 @@ void Enemy::CollisionCheck(vector<GameObject*> gameObjects)
 	m_hit_area = m_attack_collider;
 	m_hit_area.SetActive(true);
 
-if (m_attacking && !m_gfx.OneIsAlreadyTriggered())
+	if (m_attacking && !m_gfx.OneIsAlreadyTriggered())
 {
 	m_attack_frame = m_gfx.OneIsTriggered();
 }
 
-if (m_attack_frame) m_attack_collider.SetActive(true);
+	if (m_attack_frame) m_attack_collider.SetActive(true);
 
-if (!m_collider.GetActive())
+	if (!m_collider.GetActive())
 {
 	return;
 }
 
-for (int i = 0; i < gameObjects.size(); i++)
+	for (int i = 0; i < gameObjects.size(); i++)
 {
-	if (gameObjects[i] != this && gameObjects[i]->GetCollider().GetActive() && m_collider.GetActive())
-	{
-		Collided c = { gameObjects[i], m_collider.CollisionCheck(
-			m_collider.IsTrigger(),
-		  {
-			m_transform.position.x + m_attempted_frame_movement.x,
-			m_transform.position.y + m_attempted_frame_movement.y,
-			m_transform.scale.x * m_collider_scale.x,
-			m_transform.scale.y * m_collider_scale.y
-		  },
-		  { gameObjects[i]->GetTransform().position.x,
-			gameObjects[i]->GetTransform().position.y,
-			gameObjects[i]->GetTransform().scale.x * gameObjects[i]->GetColliderScale().x,
-			gameObjects[i]->GetTransform().scale.y * gameObjects[i]->GetColliderScale().y
-		  })
-		};
+		Vector2 distance = gameObjects[i]->GetTransform().position - m_transform.position;
 
-		if (c.info.collided)
+		if ((distance.Absolute()).Magnitude() < 2.0f)
 		{
-			m_frame_collided.push_back(c);
+			if (gameObjects[i] != this && gameObjects[i]->GetCollider().GetActive() && m_collider.GetActive())
+			{
+				Collided c = { gameObjects[i], m_collider.CollisionCheck(
+					m_collider.IsTrigger(),
+				  {
+					m_transform.position.x + m_attempted_frame_movement.x,
+					m_transform.position.y + m_attempted_frame_movement.y,
+					m_transform.scale.x * m_collider_scale.x,
+					m_transform.scale.y * m_collider_scale.y
+				  },
+				  { gameObjects[i]->GetTransform().position.x,
+					gameObjects[i]->GetTransform().position.y,
+					gameObjects[i]->GetTransform().scale.x * gameObjects[i]->GetColliderScale().x,
+					gameObjects[i]->GetTransform().scale.y * gameObjects[i]->GetColliderScale().y
+				  })
+				};
+
+				if (c.info.collided)
+				{
+					m_frame_collided.push_back(c);
+				}
+			}
+
+			if (gameObjects[i] != this && gameObjects[i]->GetCollider().GetActive() && m_attack_collider.GetActive())
+			{
+				Collided c = { gameObjects[i], m_collider.CollisionCheck(
+					m_attack_collider.IsTrigger(),
+				  {
+					m_transform.position.x + m_attempted_frame_movement.x + m_attack_collider.GetCollisionOffset().x,
+					m_transform.position.y + m_attempted_frame_movement.y + m_attack_collider.GetCollisionOffset().y,
+					m_transform.scale.x * m_attack_collider_scale.x,
+					m_transform.scale.y * m_attack_collider_scale.y
+				  },
+				  { gameObjects[i]->GetTransform().position.x,
+					gameObjects[i]->GetTransform().position.y,
+					gameObjects[i]->GetTransform().scale.x * gameObjects[i]->GetColliderScale().x,
+					gameObjects[i]->GetTransform().scale.y * gameObjects[i]->GetColliderScale().y
+				  })
+				};
+
+				if (c.info.collided)
+				{
+					m_frame_collided.push_back(c);
+				}
+			}
+
+			if (gameObjects[i] != this && gameObjects[i]->GetCollider().GetActive() && m_hit_area.GetActive())
+			{
+				Collided c = { gameObjects[i], m_collider.CollisionCheck(
+					m_hit_area.IsTrigger(),
+				  {
+					m_transform.position.x + m_attempted_frame_movement.x + m_hit_area.GetCollisionOffset().x,
+					m_transform.position.y + m_attempted_frame_movement.y + m_hit_area.GetCollisionOffset().y,
+					m_transform.scale.x * m_attack_collider_scale.x,
+					m_transform.scale.y * m_attack_collider_scale.y
+				  },
+				  { gameObjects[i]->GetTransform().position.x,
+					gameObjects[i]->GetTransform().position.y,
+					gameObjects[i]->GetTransform().scale.x * gameObjects[i]->GetColliderScale().x,
+					gameObjects[i]->GetTransform().scale.y * gameObjects[i]->GetColliderScale().y
+				  })
+				};
+
+				if (c.info.collided)
+				{
+					m_frame_collided.push_back(c);
+				}
+			}
 		}
-	}
-
-	if (gameObjects[i] != this && gameObjects[i]->GetCollider().GetActive() && m_attack_collider.GetActive())
-	{
-		Collided c = { gameObjects[i], m_collider.CollisionCheck(
-			m_attack_collider.IsTrigger(),
-		  {
-			m_transform.position.x + m_attempted_frame_movement.x + m_attack_collider.GetCollisionOffset().x,
-			m_transform.position.y + m_attempted_frame_movement.y + m_attack_collider.GetCollisionOffset().y,
-			m_transform.scale.x * m_attack_collider_scale.x,
-			m_transform.scale.y * m_attack_collider_scale.y
-		  },
-		  { gameObjects[i]->GetTransform().position.x,
-			gameObjects[i]->GetTransform().position.y,
-			gameObjects[i]->GetTransform().scale.x * gameObjects[i]->GetColliderScale().x,
-			gameObjects[i]->GetTransform().scale.y * gameObjects[i]->GetColliderScale().y
-		  })
-		};
-
-		if (c.info.collided)
-		{
-			m_frame_collided.push_back(c);
-		}
-	}
-
-	if (gameObjects[i] != this && gameObjects[i]->GetCollider().GetActive() && m_hit_area.GetActive())
-	{
-		Collided c = { gameObjects[i], m_collider.CollisionCheck(
-			m_hit_area.IsTrigger(),
-		  {
-			m_transform.position.x + m_attempted_frame_movement.x + m_hit_area.GetCollisionOffset().x,
-			m_transform.position.y + m_attempted_frame_movement.y + m_hit_area.GetCollisionOffset().y,
-			m_transform.scale.x * m_attack_collider_scale.x,
-			m_transform.scale.y * m_attack_collider_scale.y
-		  },
-		  { gameObjects[i]->GetTransform().position.x,
-			gameObjects[i]->GetTransform().position.y,
-			gameObjects[i]->GetTransform().scale.x * gameObjects[i]->GetColliderScale().x,
-			gameObjects[i]->GetTransform().scale.y * gameObjects[i]->GetColliderScale().y
-		  })
-		};
-
-		if (c.info.collided)
-		{
-			m_frame_collided.push_back(c);
-		}
-	}
 }
 
 m_attack_collider.SetActive(false);
