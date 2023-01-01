@@ -30,6 +30,9 @@ public:
 
 	static void Cleanup();
 
+	static void SetLevel(CurrentLevel level) { m_current_level = level; }
+	static CurrentLevel GetLevel() { return m_current_level; }
+
 private:
 
 	static string m_save_file;

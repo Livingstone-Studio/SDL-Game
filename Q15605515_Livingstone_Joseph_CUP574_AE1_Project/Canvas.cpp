@@ -26,7 +26,7 @@ Canvas::Canvas()
 	m_level_select_elements.push_back(new UIElement(TopLeft, { 0, .8f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "Press Escape To Return", { 6,1 }));
 	
 	m_level_select_elements.push_back(new PlayButton(TopLeft, { -.5f, 0, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
-	m_level_select_elements.push_back(new PlayButton(TopLeft, { .5f, 0, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
+	m_level_select_elements.push_back(new PlayLevelTwo(TopLeft, { .5f, 0, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
 	
 	// How To Play
 
@@ -85,13 +85,13 @@ Canvas::Canvas()
 
 	// Victory Screen
 
-	m_victory_elements.push_back(new UIElement(TopLeft, { 0, .8f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "Victory", { 8,2 }));
-	m_victory_elements.push_back(new ReturnToMenuButton(TopLeft, { 0, -.2f, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
+	m_victory_elements.push_back(new UIElement(TopLeft, { 0, .6f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "Victory", { 8,2 }));
+	m_victory_elements.push_back(new ReturnToMenuButton(TopLeft, { 0, -.4f, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }, "Return To Menu"));
 
 	// Death Screen
 
-	m_death_elements.push_back(new UIElement(TopLeft, { 0, .8f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "You Lose", { 8,2 }));
-	m_death_elements.push_back(new ReturnToMenuButton(TopLeft, { 0, -.2f, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }));
+	m_death_elements.push_back(new UIElement(TopLeft, { 0, .6f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "You Lose", { 8,2 }));
+	m_death_elements.push_back(new ReturnToMenuButton(TopLeft, { 0, -.4f, 4.0f, 4.0f }, { 64, 240, 48, 16 }, { 0, 0, 0, 0 }, "Return To Menu"));
 
 	// Debug
 

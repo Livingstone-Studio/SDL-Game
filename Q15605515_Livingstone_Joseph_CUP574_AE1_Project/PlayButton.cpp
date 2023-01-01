@@ -11,7 +11,7 @@ PlayButton::PlayButton()
 PlayButton::PlayButton(AnchorPosition anchorPoint, Transform animDES, Transform animOneSRC, Transform animTwoSRC)
 	: Button(anchorPoint, animDES, animOneSRC, animTwoSRC)
 {
-	m_text_scaling = { 1.5f,1.5f };
+	m_text_scaling = { 4,1 };
 }
 
 
@@ -25,12 +25,13 @@ void PlayButton::RenderUpdate(SDL_Renderer* renderer, Camera camera)
 
 		m_gfx.RenderUpdate(renderer, camera.ConvertToUISpace(m_anchor_point, t));
 
-		RenderText(renderer, camera, "Play");
+		RenderText(renderer, camera, "Play Level One");
 	}
 }
 
 
 void PlayButton::PressButton()
 {
+	ScoreManager::SetLevel(LevelOne);
 	Game::Play();
 }

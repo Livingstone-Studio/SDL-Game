@@ -185,7 +185,17 @@ void Game::GameSetup()
     
     m_player_cast = dynamic_cast<Player*>(m_gameobjects[0]);
 
-    vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/TestLevel.txt");
+    vector<GameObject*> t;
+
+    switch (ScoreManager::GetLevel()) 
+    {
+    case LevelOne:
+        t = LevelHandler::CreateLevel("Assets/LevelInfo/Level_One.txt");
+        break;
+    case LevelTwo:
+        t = LevelHandler::CreateLevel("Assets/LevelInfo/Level_Two.txt");
+        break;
+    }
 
     m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
 
@@ -199,13 +209,6 @@ void Game::GameSetup()
 
         if (slimecast != nullptr) slimecast->SetTarget(m_player_cast);
     }
-
-    m_gameobjects.push_back(new Collectable({ 7, 0, 1, 1 }));
-    m_gameobjects.push_back(new Collectable({ 7, 1, 1, 1 }));
-    m_gameobjects.push_back(new Collectable({ 8, 0, 1, 1 }, true));
-    m_gameobjects.push_back(new Collectable({ 8, 1, 1, 1 }));
-    m_gameobjects.push_back(new Collectable({ 9, 0, 1, 1 }));
-    m_gameobjects.push_back(new Collectable({ 9, 1, 1, 1 }));
 
     m_camera.InitializePlayerHUD(m_player_cast);
 

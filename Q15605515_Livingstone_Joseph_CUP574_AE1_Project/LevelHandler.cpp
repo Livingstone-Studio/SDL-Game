@@ -137,7 +137,7 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
                 break;
             case 'N':
                 t.push_back(
-                    new Prop(transform, m_riverTiles[1], true, m_tile_collider_scaling));
+                    new Prop(transform, m_riverTiles[1]));
                 break;
             case 'M':
                 t.push_back(
@@ -167,12 +167,26 @@ vector<GameObject*> LevelHandler::CreateLevel(string levelPath)
                 t.push_back(
                     new Orc({ transform.position , { 5, 5 } }));
                 break;
+            case '4':
+                t.push_back(
+                    new Prop(transform, m_plainsTile));
+                t.push_back(
+                    new Slime({ transform.position , { 5, 5 } }));
+                break;
+
             case '2':
                 t.push_back(
                     new Prop(transform, m_plainsTile));
                 t.push_back(
-                    new Slime({ transform.position , { 5, 5 } } ));
+                    new Collectable({ transform.position }));
                 break;
+            case '3':
+                t.push_back(
+                    new Prop(transform, m_plainsTile));
+                t.push_back(
+                    new Collectable({ transform.position , { 1, 1 } }, true));
+                break;
+
 
             default:
                 break;

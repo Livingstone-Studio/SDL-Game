@@ -79,12 +79,17 @@ bool Button::CheckMouseOnButton(Camera camera)
 {
 	Transform t = m_transform;
 	t = t.position + m_offset;
-	t = camera.ConvertToUISpace(m_anchor_point, t);
-	Vector2 m = Input::GetMousePosition();
-
-	t.scale *= m_transform.scale;
 
 	t.scale *= m_scale;
+	t.scale *= m_transform.scale;
+
+	Vector2 scale = { 5,2 };
+
+	t.scale *= scale;
+
+	t = camera.ConvertToUISpace(m_anchor_point, t);
+
+	Vector2 m = Input::GetMousePosition();
 
 	Vector2 box_min = t.position - t.scale;
 	Vector2 box_max = t.position + t.scale;

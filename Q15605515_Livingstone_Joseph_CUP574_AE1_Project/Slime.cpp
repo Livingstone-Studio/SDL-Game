@@ -1,5 +1,7 @@
 #include "Slime.h"
 
+#include "Game.h"
+
 Slime::Slime()
 {
 	m_move_speed = 1.0f;
@@ -44,7 +46,7 @@ void Slime::Update(float deltaTime)
 		{
 			moveVector = m_target->GetTransform().position - m_transform.position;
 
-			if (m_target->IsDead())
+			if (m_target->IsDead() || Game::GetCanvasState() == VictoryScreen)
 			{
 				m_target = nullptr;
 			}

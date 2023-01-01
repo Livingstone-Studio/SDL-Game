@@ -62,6 +62,7 @@ public:
 	static bool DebugMode() { return m_debug; }
 
 	static void ChangeCanvasState(CurrentUI state) { m_camera.SetCanvasState(state); }
+	static CurrentUI GetCanvasState() { return m_camera.GetCanvasState(); }
 
 private:
 

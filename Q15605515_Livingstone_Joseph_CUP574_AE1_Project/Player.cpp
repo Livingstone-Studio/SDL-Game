@@ -32,6 +32,9 @@ void Player::InitializeHUD(vector<Slider*> elements, UIElement* score)
 	m_energy_bar = elements[1];
 
 	m_score_ui = score;
+
+	if (m_health_bar != nullptr) m_health_bar->SetSize((float)m_health / (float)m_max_health);
+	else cout << "No bar" << endl;
 }
 
 void Player::RenderStart(SDL_Renderer* renderer, Camera camera)

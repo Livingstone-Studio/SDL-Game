@@ -153,6 +153,9 @@
     <ClCompile Include="ScoreManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayLevelTwo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -261,6 +264,9 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="ScoreManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevelTwo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

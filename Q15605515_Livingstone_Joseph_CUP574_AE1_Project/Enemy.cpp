@@ -1,5 +1,7 @@
 #include "Enemy.h"
 
+#include "Game.h"
+
 Enemy::Enemy()
 {
 }
@@ -28,7 +30,7 @@ void Enemy::Update(float deltaTime)
 		{
 			moveVector = m_target->GetTransform().position - m_transform.position;
 
-			if (m_target->IsDead())
+			if (m_target->IsDead() || Game::GetCanvasState() == VictoryScreen)
 			{
 				m_target = nullptr;
 			}
