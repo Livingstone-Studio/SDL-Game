@@ -82,6 +82,16 @@ void Game::Setup()
     m_window = SDL_CreateWindow( WINDOW_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
     m_renderer = SDL_CreateRenderer(m_window, -1, 0);
 
+
+    // create the icon surface 
+    SDL_Surface* icon_surface = IMG_Load("Assets/SpriteSheets/Icon.png");
+
+    // set the icon surface 
+    SDL_SetWindowIcon(m_window, icon_surface);
+
+    // free the icon surface 
+    SDL_FreeSurface(icon_surface);
+
     Input::Initialize();
     AssetLoader::Initialize(m_renderer);
     AudioManager::Initialize();
