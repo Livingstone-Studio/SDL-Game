@@ -32,11 +32,13 @@ Canvas::Canvas()
 
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, .8f, 5.0f, 5.0f }, { 16, 288, 48, 16 }, { 0, 0, 0, 0 }, "Press Escape To Return", { 6,1 }));
 	
-	m_controls_menu_elements.push_back(new UIElement(TopLeft, { -.5f, 0, 5.0f, 5.0f }, { 81, 208, 23, 18 }, { 0, 0, 0, 0 }, "Move", { 6,2 }, { 0,-.5f }));
-	m_controls_menu_elements.push_back(new UIElement(TopLeft, { .5f, 0, 4.0f, 4.0f }, { 113, 227, 7, 10 }, { 0, 0, 0, 0 }, "Attack", { 6,2 }, { 0,-.5f }));
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { -.5f, 0, 5.0f, 5.0f }, { 81, 208, 23, 18 }, { 0, 0, 0, 0 }, "Move", { 3,1 }, { 0,-.25f }));
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { .5f, 0, 4.0f, 4.0f }, { 113, 227, 7, 10 }, { 0, 0, 0, 0 }, "Attack", { 3,1 }, { 0,-.25f }));
 
-	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, .5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Your goal is to help Gobbie plant his crops! Find the seeds and plant them on tilled dirt!", { 23,1 }));
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, .5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Your goal is to help Gobbie plant his crops! Find the seeds and plant them on tilled dirt!", { 26,1.1f }));
 	
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, -.5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press: '1' for 0.5x zoom, '2' for 1x zoom and '3' for 3x zoom", { 16,1 }));
+
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, -.8f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press F11 to go in to fullscreen mode.", { 23,1.5f }));
 
 	// HUD

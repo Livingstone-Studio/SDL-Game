@@ -106,66 +106,7 @@ void Game::AppLoop()
         {
         case SMainMenu:
 
-            if (m_menu_first_frame) 
-            {
-                for (int i = 0; i < m_gameobjects.size(); i++)
-                {
-                    if (m_gameobjects[i] != nullptr)
-                    {
-                        m_gameobjects[i]->Delete();
-                    }
-                }
-
-                m_gameobjects.clear();
-
-                m_camera.SetCameraPosition({ 0,0 });
-                m_camera.SetCameraSize({ 0.5f,0.5f });
-
-                m_player_cast = nullptr;
-
-                vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/MainMenu.txt");
-
-                m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
-
-                m_menu_first_frame = false;
-            }
-
-            Input::Update();
-            Time::Update();
-
-            if (m_camera.GetCanvasState() != HowToPlay && m_camera.GetCanvasState() != LevelSelect) m_camera.SetCanvasState(MainMenu);
-
-            FrameInit();
-
-            for (int i = 0; i < m_gameobjects.size(); i++)
-            {
-                if (m_gameobjects[i] != nullptr)
-                {
-                    if (!m_gameobjects[i]->IsInitialized()) m_gameobjects[i]->Start();
-                }
-            }
-
-            m_camera.Start();
-
-            m_camera.RenderStart(m_renderer, m_gameobjects);
-
-            InputHandler();
-
-            int w, h;
-            SDL_GetWindowSize(m_window, &w, &h);
-            m_camera.Update({ (float)DEFAULT_WINDOW_WIDTH, (float)DEFAULT_WINDOW_HEIGHT }, { (float)w, (float)h });
-
-            for (int i = 0; i < m_gameobjects.size(); i++)
-            {
-                if (m_gameobjects[i] != nullptr)
-                {
-                    m_gameobjects[i]->Update(Time::GetDeltaTime());
-                }
-            }
-
-            RendererHandler();
-
-            FrameCleanup();
+            MainMenuExecution();
 
             break;
 
@@ -180,6 +121,8 @@ void Game::AppLoop()
 
 void Game::GameSetup()
 {
+    m_camera.SetScale(1);
+
     for (int i = 0; i < m_gameobjects.size(); i++)
     {
         if (m_gameobjects[i] != nullptr)
@@ -254,6 +197,19 @@ void Game::GameLoop()
 
         InputHandler();
 
+        if (Input::GetKeyDown(SDL_SCANCODE_1))
+        {
+            m_camera.SetScale(.5f);
+        }
+        else if (Input::GetKeyDown(SDL_SCANCODE_2))
+        {
+            m_camera.SetScale(1);
+        }
+        else if (Input::GetKeyDown(SDL_SCANCODE_3))
+        {
+            m_camera.SetScale(1.5f);
+        }
+
         EventHandler();
 
         RendererHandler();
@@ -304,20 +260,6 @@ void Game::InputHandler()
     {
         SDL_SetWindowFullscreen(m_window, 0);
         m_fullscreen = false;
-    }
-
-
-    if (Input::GetKeyDown(SDL_SCANCODE_1))
-    {
-        m_camera.SetScale(.5f);
-    }
-    else if (Input::GetKeyDown(SDL_SCANCODE_2))
-    {
-        m_camera.SetScale(1);
-    }
-    else if (Input::GetKeyDown(SDL_SCANCODE_3))
-    {
-        m_camera.SetScale(1.5f);
     }
 
     if (Input::GetKeyDown(SDL_SCANCODE_N) && m_debug && m_player_cast != nullptr)
@@ -385,6 +327,72 @@ void Game::GameClose()
     }
 
     m_gameobjects.clear();
+}
+
+void Game::MainMenuExecution()
+{
+    if (m_menu_first_frame)
+    {
+        for (int i = 0; i < m_gameobjects.size(); i++)
+        {
+            if (m_gameobjects[i] != nullptr)
+            {
+                m_gameobjects[i]->Delete();
+            }
+        }
+
+        m_gameobjects.clear();
+
+        m_camera.SetCameraPosition({ 0,0 });
+
+        m_camera.SetScale(1);
+
+        m_player_cast = nullptr;
+
+        vector<GameObject*> t = LevelHandler::CreateLevel("Assets/LevelInfo/MainMenu.txt");
+
+        m_gameobjects.insert(m_gameobjects.end(), t.begin(), t.end());
+
+        m_menu_first_frame = false;
+    }
+
+    Input::Update();
+    Time::Update();
+
+    if (m_camera.GetCanvasState() != HowToPlay && m_camera.GetCanvasState() != LevelSelect) m_camera.SetCanvasState(MainMenu);
+
+    FrameInit();
+
+    for (int i = 0; i < m_gameobjects.size(); i++)
+    {
+        if (m_gameobjects[i] != nullptr)
+        {
+            if (!m_gameobjects[i]->IsInitialized()) m_gameobjects[i]->Start();
+        }
+    }
+
+    m_camera.Start();
+
+    m_camera.RenderStart(m_renderer, m_gameobjects);
+
+    InputHandler();
+
+    int w, h;
+    SDL_GetWindowSize(m_window, &w, &h);
+    m_camera.Update({ (float)DEFAULT_WINDOW_WIDTH, (float)DEFAULT_WINDOW_HEIGHT }, { (float)w, (float)h });
+
+    for (int i = 0; i < m_gameobjects.size(); i++)
+    {
+        if (m_gameobjects[i] != nullptr)
+        {
+            m_gameobjects[i]->Update(Time::GetDeltaTime());
+        }
+    }
+
+    RendererHandler();
+
+    FrameCleanup();
+
 }
 
 void Game::Close()

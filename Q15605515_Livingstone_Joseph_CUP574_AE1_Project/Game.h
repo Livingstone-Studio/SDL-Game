@@ -94,6 +94,8 @@ private:
 
 	void AppLoop();
 
+	void MainMenuExecution();
+
 	void GameSetup();
 
 	void FrameInit();
