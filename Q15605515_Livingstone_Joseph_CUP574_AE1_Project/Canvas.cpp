@@ -36,8 +36,10 @@ Canvas::Canvas()
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { .5f, 0, 4.0f, 4.0f }, { 113, 227, 7, 10 }, { 0, 0, 0, 0 }, "Attack", { 3,1 }, { 0,-.25f }));
 
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, .5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Your goal is to help Gobbie plant his crops! Find the seeds and plant them on tilled dirt!", { 26,1.1f }));
-	
-	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, -.5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press: '1' for 0.5x zoom, '2' for 1x zoom and '3' for 3x zoom", { 16,1 }));
+
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, .2f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press 'Left Shift' to sprint", { 10,1 }));
+
+	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, -.5f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press: '1' for 0.5x zoom, '2' for 1x zoom and '3' for 2x zoom", { 16,1 }));
 
 	m_controls_menu_elements.push_back(new UIElement(TopLeft, { 0, -.8f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press F11 to go in to fullscreen mode.", { 23,1.5f }));
 
@@ -99,7 +101,7 @@ Canvas::Canvas()
 
 	// Debug
 
-	m_debug_elements.push_back(new UIElement(TopLeft, { 0.075f, .8f, 2.75f, 2.75f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }));
+	m_debug_elements.push_back(new UIElement(TopLeft, { 0.9f, .8f, 2.75f, 2.75f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }));
 	m_debug_elements.push_back(new UIElement(TopLeft, { 0, -.6f, 5.0f, 5.0f }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, "Press N to toggle no clip mode.", { 23,1 }));
 
 }
