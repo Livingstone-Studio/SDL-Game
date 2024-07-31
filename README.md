@@ -1,7 +1,7 @@
 This is my repository for 'Gobbie The Gobbo', a top-down game I made using C++, SDL2, SDL_Image, SDL_TTF and SDL_Mixer.
 
 This was one of my first C++ projects, and was my first time using SDL2. Looking back on it, two years later, there are lots of improvements that can be made
-which I am planning to get around to at some point. If you wish to see a list of things I plan to fix, there is a TODO comment in main.cpp describing the areas
+which I am planning to get around to at some point. If you wish to see a list of things I plan to fix when I have spare time, there is a TODO comment in main.cpp describing the areas
 I plan to revise, which will probably get a lot longer the more I reimmerse myself back into the codebase.
 
 The project will not work if you were to download it from here - I have commerically licensed assets in the game which have been removed from this repo so I can keep it public,
