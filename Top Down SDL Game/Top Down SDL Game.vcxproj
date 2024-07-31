@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8c966c41-0f18-4638-8f04-794535f45104}</ProjectGuid>
+    <RootNamespace>Q15605515LivingstoneJosephCUP574AE1Project</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Top Down SDL Game</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\lib\x86;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\lib\x86;$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\lib\x86;$(SolutionDir)Top Down SDL Game\Libs\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\lib\x86;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\lib\x86;$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\lib\x86;$(SolutionDir)Top Down SDL Game\Libs\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\lib\x64;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\lib\x64;$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\lib\x64;$(SolutionDir)Top Down SDL Game\Libs\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\include;$(SolutionDir)Top Down SDL Game\Libs\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Top Down SDL Game\Libs\SDL2_ttf\lib\x64;$(SolutionDir)Top Down SDL Game\Libs\SDL2_mixer\lib\x64;$(SolutionDir)Top Down SDL Game\Libs\SDL2_image\lib\x64;$(SolutionDir)Top Down SDL Game\Libs\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Rendering\Animation.cpp" />
+    <ClCompile Include="Source\Rendering\AnimClip.cpp" />
+    <ClCompile Include="Source\Application\AssetLoader.cpp" />
+    <ClCompile Include="Source\Rendering\SpriteRenderer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Button.cpp" />
+    <ClCompile Include="Source\Rendering\Camera.cpp" />
+    <ClCompile Include="Source\UI\Canvas.cpp" />
+    <ClCompile Include="Source\GameObjects\Character.cpp" />
+    <ClCompile Include="Source\GameObjects\Collectable.cpp" />
+    <ClCompile Include="Source\Application\Collider.cpp" />
+    <ClCompile Include="Source\UI\DebugButton.cpp" />
+    <ClCompile Include="Source\GameObjects\Enemy.cpp" />
+    <ClCompile Include="Source\Application\Game.cpp" />
+    <ClCompile Include="Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="Source\UI\HowToPlayButton.cpp" />
+    <ClCompile Include="Source\Application\Input.cpp" />
+    <ClCompile Include="Source\Application\LevelHandler.cpp" />
+    <ClCompile Include="Source\UI\LevelSelectButton.cpp" />
+    <ClCompile Include="Source\Application\main.cpp" />
+    <ClCompile Include="Source\Application\Maths.cpp" />
+    <ClCompile Include="Source\UI\MuteButton.cpp" />
+    <ClCompile Include="Source\GameObjects\Orc.cpp" />
+    <ClCompile Include="Source\UI\PlayButton.cpp" />
+    <ClCompile Include="Source\GameObjects\Player.cpp" />
+    <ClCompile Include="Source\UI\PlayLevelTwo.cpp" />
+    <ClCompile Include="Source\GameObjects\Prop.cpp" />
+    <ClCompile Include="Source\UI\QuitButton.cpp" />
+    <ClCompile Include="Source\UI\ReturnToMenuButton.cpp" />
+    <ClCompile Include="Source\UI\MuteEffectButton.cpp" />
+    <ClCompile Include="Source\Application\ScoreManager.cpp" />
+    <ClCompile Include="Source\UI\SettingsButton.cpp" />
+    <ClCompile Include="Source\UI\Slider.cpp" />
+    <ClCompile Include="Source\GameObjects\Slime.cpp" />
+    <ClCompile Include="Source\Audio\AudioManager.cpp" />
+    <ClCompile Include="Source\Rendering\Sprite.cpp" />
+    <ClCompile Include="Source\UI\SystemSettings.cpp" />
+    <ClCompile Include="Source\Application\Time.cpp" />
+    <ClCompile Include="Source\UI\UIElement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Rendering\Animation.h" />
+    <ClInclude Include="Source\Rendering\AnimClip.h" />
+    <ClInclude Include="Source\Application\AssetLoader.h" />
+    <ClInclude Include="Source\Rendering\SpriteRenderer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Source\UI\Button.h" />
+    <ClInclude Include="Source\Rendering\Camera.h" />
+    <ClInclude Include="Source\UI\Canvas.h" />
+    <ClInclude Include="Source\GameObjects\Character.h" />
+    <ClInclude Include="Source\GameObjects\Collectable.h" />
+    <ClInclude Include="Source\Application\Collider.h" />
+    <ClInclude Include="Source\UI\DebugButton.h" />
+    <ClInclude Include="Source\GameObjects\Enemy.h" />
+    <ClInclude Include="Source\Application\Game.h" />
+    <ClInclude Include="Source\GameObjects\GameObject.h" />
+    <ClInclude Include="Source\UI\HowToPlayButton.h" />
+    <ClInclude Include="Source\Application\Input.h" />
+    <ClInclude Include="Source\Application\LevelHandler.h" />
+    <ClInclude Include="Source\UI\LevelSelectButton.h" />
+    <ClInclude Include="Source\Application\Maths.h" />
+    <ClInclude Include="Source\UI\MuteButton.h" />
+    <ClInclude Include="Source\GameObjects\Orc.h" />
+    <ClInclude Include="Source\UI\PlayButton.h" />
+    <ClInclude Include="Source\GameObjects\Player.h" />
+    <ClInclude Include="Source\UI\PlayLevelTwo.h" />
+    <ClInclude Include="Source\GameObjects\Prop.h" />
+    <ClInclude Include="Source\UI\QuitButton.h" />
+    <ClInclude Include="Source\UI\ReturnToMenuButton.h" />
+    <ClInclude Include="Source\UI\MuteEffectButton.h" />
+    <ClInclude Include="Source\Application\ScoreManager.h" />
+    <ClInclude Include="Source\UI\SettingsButton.h" />
+    <ClInclude Include="Source\UI\Slider.h" />
+    <ClInclude Include="Source\GameObjects\Slime.h" />
+    <ClInclude Include="Source\Audio\AudioManager.h" />
+    <ClInclude Include="Source\Rendering\Sprite.h" />
+    <ClInclude Include="Source\Application\Structs.h" />
+    <ClInclude Include="Source\UI\SystemSettings.h" />
+    <ClInclude Include="Source\Application\Time.h" />
+    <ClInclude Include="Source\UI\UIElement.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
