@@ -15,7 +15,3 @@ Link: https://tallbeard.itch.io/music-loop-bundle
 Specific track used: Ludum Dare 38 - Track Nine [game loop, free download]
 
 Sound Effects Made Using SFXR
-
-CODING - 
-
-All Done By Me - Joseph Livingstone
