@@ -1,4 +1,4 @@
-This is my repositry for 'Gobbie The Gobbo', a top-down game I made using C++, SDL2, SDL_Image, SDL_TTF and SDL_Mixer.
+This is my repository for 'Gobbie The Gobbo', a top-down game I made using C++, SDL2, SDL_Image, SDL_TTF and SDL_Mixer.
 
 This was one of my first C++ projects, and was my first time using SDL2. Looking back on it, two years later, there are lots of improvements that can be made
 which I am planning to get around to at some point. If you wish to see a list of things I plan to fix, there is a TODO comment in main.cpp describing the areas
